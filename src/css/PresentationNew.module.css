@@ -1,0 +1,253 @@
+.presentation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  width: 90%;
+  max-width: 1200px;
+  margin: 8% auto;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.introduction {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.intro_text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.main_title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #8b5fbf;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.feature_item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.button_group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn_primary, .btn_secondary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn_primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.btn_primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.btn_secondary {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.btn_secondary:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.btn_text {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.btn_subtext {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.login_link {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.login_link:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* Hero Visual Section */
+.hero_visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.floating_cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 400px;
+}
+
+.service_card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.service_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.service_card:nth-child(even) {
+  margin-top: 2rem;
+}
+
+.card_icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.service_card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.service_card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .presentation {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin: 5% auto;
+    text-align: center;
+  }
+  
+  .hero_visual {
+    order: -1;
+  }
+  
+  .floating_cards {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .presentation {
+    width: 95%;
+    gap: 2rem;
+  }
+  
+  .button_group {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn_primary, .btn_secondary {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .floating_cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .service_card:nth-child(even) {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .main_title {
+    font-size: 2rem;
+  }
+  
+  .floating_cards {
+    max-width: 280px;
+  }
+  
+  .service_card {
+    padding: 1rem;
+  }
+}
