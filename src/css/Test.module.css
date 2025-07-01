@@ -31,6 +31,15 @@
 .test_end {
   margin: auto;
   width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.test_end a[class*="hobby_btn"] {
+  margin-top: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button {

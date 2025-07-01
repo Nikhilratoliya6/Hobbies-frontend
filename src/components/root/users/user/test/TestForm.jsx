@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../../../../css/Test.module.css";
+import hobbyBtnStyles from "../../../../../css/SimpleButtons.module.css";
 import style from "../../../../../css/Footer.module.css";
 import layout from "../../../../../css/UserHome.module.css";
 import BackgroundHome from "../../../fragments/background/BackgroundHome";
@@ -140,11 +141,10 @@ const TestForm = () => {
               🎉 Amazing! Your hobby personality is ready! <br></br>
               Discover hobby professionals and experiences matched just for you!{" "}
               <br></br>
-              <button type="submit" className={styles.button}>
-                <Link to="/user-home" className={styles.link_home}>
-                  Find My Hobby Matches
-                </Link>
-              </button>
+              <Link to="/user-home" className={`${hobbyBtnStyles.hobby_btn_primary} ${hobbyBtnStyles.multi_line}`}>
+                <span className={hobbyBtnStyles.btn_icon}>🎯</span>
+                <span className={hobbyBtnStyles.btn_text}>Find My Hobby Matches</span>
+              </Link>
             </section>
           </div>
         )}
