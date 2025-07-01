@@ -1,8 +1,9 @@
 import axios from "axios";
+import config from "../../config/config";
 
 const AuthenticateUserDataService = (username, password) => {
   return axios
-    .post(`http://localhost:8080/authenticate`, {
+    .post(`${config.API_BASE_URL}/authenticate`, {
       username,
       password,
     })
