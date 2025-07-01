@@ -27,9 +27,12 @@
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
   gap: 2rem;
   padding: 2rem 0;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .rapper {
@@ -38,6 +41,8 @@
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   height: fit-content;
+  max-width: 400px;
+  width: 100%;
 }
 
 .rapper:hover {
@@ -369,6 +374,23 @@
     letter-spacing: 0.6px;
   }
 }
+
+/* Tablet and medium screen adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+    gap: 1.5rem;
+  }
+}
+
+/* Large screen adjustments - limit to 3 cards per row max */
+@media (min-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+    max-width: 1400px;
+  }
+}
+
 .intro_text {
   margin: auto;
   padding-bottom: 30px;

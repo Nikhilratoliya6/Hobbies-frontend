@@ -291,6 +291,40 @@ const HobbiePages = () => {
                 </article>
               )}
 
+              {/* User Action Buttons - positioned below tabs for small screens too */}
+              {isUserLoggedIn && isColumnBasedSmall && currentPage === "about" && (
+                <div className={`${hobbyBtnStyles.btn_group} ${styles.user_actions_small}`}>
+                  <button 
+                    onClick={handleSave(hobby.id)}
+                    className={saved ? hobbyBtnStyles.hobby_btn_success : hobbyBtnStyles.hobby_btn_primary}
+                  >
+                    <span className={hobbyBtnStyles.btn_icon}>
+                      {saved ? "💖" : "🤍"}
+                    </span>
+                    <span className={hobbyBtnStyles.btn_text}>
+                      {saved ? "❤️ Saved!" : "💝 Add to Favorites"}
+                    </span>
+                  </button>
+                </div>
+              )}
+
+              {/* User Action Buttons - positioned below tabs */}
+              {isUserLoggedIn && !isColumnBasedSmall && currentPage === "about" && (
+                <div className={`${hobbyBtnStyles.btn_group} ${styles.user_actions}`}>
+                  <button 
+                    onClick={handleSave(hobby.id)}
+                    className={saved ? hobbyBtnStyles.hobby_btn_success : hobbyBtnStyles.hobby_btn_primary}
+                  >
+                    <span className={hobbyBtnStyles.btn_icon}>
+                      {saved ? "💖" : "🤍"}
+                    </span>
+                    <span className={hobbyBtnStyles.btn_text}>
+                      {saved ? "❤️ Saved!" : "💝 Add to Favorites"}
+                    </span>
+                  </button>
+                </div>
+              )}
+
               <section className={styles.hobbie_lable}>
                 {!isColumnBasedSmall && (
                   <div>
@@ -340,43 +374,27 @@ const HobbiePages = () => {
 
                 {currentPage === "contact" && <p> {hobby.contactInfo} </p>}
 
-                {currentPage !== "gallery" && (
+                {/* Business Action Buttons - positioned at bottom of content */}
+                {isBusinessLoggedIn && currentPage !== "gallery" && (
                   <article className={styles.buttons}>
-                    {isBusinessLoggedIn && (
-                      <div className={hobbyBtnStyles.btn_group}>
-                        <Link
-                          to="#"
-                          onClick={handleEdit(hobby)}
-                          className={hobbyBtnStyles.hobby_btn_warning}
-                        >
-                          <span className={hobbyBtnStyles.btn_icon}>✏️</span>
-                          <span className={hobbyBtnStyles.btn_text}>Edit Hobby</span>
-                        </Link>
-                        <Link
-                          to="#"
-                          onClick={handleDelete(hobby)}
-                          className={hobbyBtnStyles.hobby_btn_danger}
-                        >
-                          <span className={hobbyBtnStyles.btn_icon}>🗑️</span>
-                          <span className={hobbyBtnStyles.btn_text}>Delete</span>
-                        </Link>
-                      </div>
-                    )}
-                    {isUserLoggedIn && (
-                      <div className={hobbyBtnStyles.btn_group}>
-                        <button 
-                          onClick={handleSave(hobby.id)}
-                          className={saved ? hobbyBtnStyles.hobby_btn_success : hobbyBtnStyles.hobby_btn_primary}
-                        >
-                          <span className={hobbyBtnStyles.btn_icon}>
-                            {saved ? "💖" : "🤍"}
-                          </span>
-                          <span className={hobbyBtnStyles.btn_text}>
-                            {saved ? "❤️ Saved!" : "💝 Add to Favorites"}
-                          </span>
-                        </button>
-                      </div>
-                    )}
+                    <div className={hobbyBtnStyles.btn_group}>
+                      <Link
+                        to="#"
+                        onClick={handleEdit(hobby)}
+                        className={hobbyBtnStyles.hobby_btn_warning}
+                      >
+                        <span className={hobbyBtnStyles.btn_icon}>✏️</span>
+                        <span className={hobbyBtnStyles.btn_text}>Edit Hobby</span>
+                      </Link>
+                      <Link
+                        to="#"
+                        onClick={handleDelete(hobby)}
+                        className={hobbyBtnStyles.hobby_btn_danger}
+                      >
+                        <span className={hobbyBtnStyles.btn_icon}>🗑️</span>
+                        <span className={hobbyBtnStyles.btn_text}>Delete</span>
+                      </Link>
+                    </div>
                   </article>
                 )}
               </section>

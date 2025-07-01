@@ -127,7 +127,7 @@ const MyHobbies = () => {
                         <p className={styles.card_title}>{hobby.name}</p>
                         <div className={styles.card_info}>
                           <p className={styles.text_medium}>Find out more...</p>
-                          <p className={styles.card_price}>{hobby.price} CHF</p>
+                          <p className={styles.card_price}>{hobby.price} rupees</p>
                         </div>
                       </section>
                     </Link>

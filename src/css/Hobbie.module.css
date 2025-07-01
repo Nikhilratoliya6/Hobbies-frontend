@@ -9,27 +9,26 @@
 }
 
 .hobbie_title {
-  font-size: 4rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #1e293b;
   margin: 0 auto 1rem auto;
   text-align: center;
   letter-spacing: -0.025em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .hobbie_title_small {
-  font-size: 3rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0 auto 2rem auto;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 2rem auto 1rem auto;
   text-align: center;
   letter-spacing: -0.025em;
+  padding: 0 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .slogan {
@@ -105,93 +104,141 @@
 }
 
 .hobbie_pages {
-  height: 40%;
+  height: auto;
   display: flex;
-  color: rgb(135, 158, 187);
   flex-direction: column;
-  align-items: center;
-  font-size: 13px;
-  transform: translateY(38px);
-  margin-bottom: 70px;
+  align-items: stretch;
+  font-size: 15px;
+  margin-bottom: 2rem;
   margin-left: 20px;
-  margin-right: 40px;
-  cursor: pointer;
-  padding: 10px;
+  margin-right: 20px;
+  padding: 1.5rem 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
+
 .hobbie_pages span {
-  margin-top: 40px;
+  margin: 0.75rem 0;
+  padding: 1rem 2rem;
+  color: #64748b;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  border: 2px solid #e2e8f0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+  min-width: 120px;
+  font-size: 15px;
+}
+
+.hobbie_pages span:hover {
+  color: #4f46e5;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e0e7ff 100%);
+  border-color: #4f46e5;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.2);
 }
 
 .hobbie_pages_horizontal {
-  color: rgb(135, 158, 187);
   display: flex;
-  justify-content: space-around;
-  width: 200px;
-  margin: auto;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  max-width: 100%;
 }
 
-.hobbie_active::before {
-  position: absolute;
-  content: "";
-  display: block;
-  width: 37px;
-  right: 137%;
-  top: 45%;
-  background-color: rgb(255, 177, 33);
+.hobbie_pages_horizontal span {
+  padding: 0.75rem 1.25rem;
+  color: #64748b;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 10px;
   cursor: pointer;
-  min-height: 1px;
-  z-index: 1;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  flex: 1;
+  min-width: fit-content;
+}
+
+.hobbie_pages_horizontal span:hover {
+  color: #667eea;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f4ff 100%);
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
 }
 
 .hobbie_active {
-  color: black;
+  color: #667eea !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border-color: #667eea !important;
+  font-weight: 700 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25) !important;
   position: relative;
-  transform: translateX(10px);
-  background: linear-gradient(to right, #494969, #696989);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
+}
+
+.hobbie_active::before {
+  display: none;
 }
 
 .hobbie_active_small {
-  color: black;
+  color: #667eea !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border-color: #667eea !important;
+  font-weight: 700 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25) !important;
   position: relative;
-  transform: translateX(3px);
-  background: linear-gradient(to right, #494969, #696989);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
-  border-bottom: 2px solid rgb(255, 177, 33);
-  margin-right: 15%;
 }
 
 .hobbie_small {
-  padding: 10px;
-  margin-right: 10%;
+  padding: 0.75rem 1.25rem;
 }
 
 .hobbie_lable {
   width: 100%;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
   position: relative;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .hobbie_lable p {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 15px;
-  letter-spacing: 0.8px;
-  line-height: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  line-height: 1.7;
   width: 100%;
   white-space: pre-line;
-  opacity: 6;
-  color: rgb(31, 44, 61);
-  padding-bottom: 10px;
-  font-weight: 500;
+  color: #374151;
+  margin: 0;
+  font-weight: 400;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .buttons {
@@ -463,4 +510,40 @@
   .hobbie_small {
     margin-right: 5%;
   }
+}
+
+/* User Actions positioned below tabs */
+.user_actions {
+  display: flex !important;
+  justify-content: center;
+  margin: 1.5rem auto 2rem auto;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  max-width: fit-content;
+}
+
+.user_actions button {
+  margin: 0 !important;
+}
+
+/* User Actions for small screens */
+.user_actions_small {
+  display: flex !important;
+  justify-content: center;
+  margin: 1rem auto 1.5rem auto;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  max-width: fit-content;
+}
+
+.user_actions_small button {
+  margin: 0 !important;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.5rem;
 }
