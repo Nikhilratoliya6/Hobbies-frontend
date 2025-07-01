@@ -4,7 +4,7 @@
 // export const FooterCover = () => {
 //   return (
 //     <footer className={styles.footer_cover}>
-//       JoynUp &copy; 2025 All rights reserved
+//       &copy; Hobbie 2022. All rights reserved.
 //     </footer>
 //   );
 // };

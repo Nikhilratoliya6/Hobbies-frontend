@@ -1,58 +1,67 @@
 .logo_container {
   display: flex;
+  flex: 1;
   align-items: center;
-  flex: 0 0 auto;
+  z-index: 1000;
   position: relative;
-  z-index: 101;
 }
 
 .logo {
   font-family: 'Comfortaa', 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 1.8rem;
-  margin: 0;
+  font-weight: 800;
+  font-size: 2rem;
   color: #667eea;
+  margin: 0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  letter-spacing: -0.025em;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-decoration: none;
-  letter-spacing: -0.5px;
-  transition: all 0.3s ease;
+  cursor: pointer;
   position: relative;
-  z-index: 102;
+  z-index: 1001;
 }
 
 .logo:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(1.2);
-  text-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.logo_container a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  z-index: 1001;
+  position: relative;
 }
 
 .imgHeader {
   width: 30px;
   height: 30px;
-  margin-bottom: 30px;
-  padding: 0%;
-  margin: 0%;
+  margin-right: 0.5rem;
 }
 
 @media all and (max-width: 900px) {
-  .logo_container {
-    position: relative;
+  .logo {
+    font-size: 1.75rem;
   }
   
-  .logo {
-    font-size: 1.5rem;
+  .logo_container {
+    position: relative;
+    z-index: 1001;
   }
 }
 
 @media all and (max-width: 650px) {
-  .logo_container {
-    position: relative;
+  .logo {
+    font-size: 1.5rem;
   }
   
-  .logo {
-    font-size: 1.3rem;
+  .logo_container {
+    position: relative;
+    z-index: 1001;
+    margin-top: 2%;
   }
 }

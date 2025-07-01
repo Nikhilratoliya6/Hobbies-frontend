@@ -31,170 +31,266 @@
   gap: 2rem;
   padding: 2rem 0;
   justify-content: center;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .rapper {
-  background: transparent;
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  height: fit-content;
-  max-width: 400px;
+  position: relative;
   width: 100%;
-}
-
-.rapper:hover {
-  transform: translateY(-10px);
+  max-width: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  background: white;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
   text-decoration: none;
-  transition: all 0.4s ease;
+  color: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  height: 100%;
 }
 
 .card:hover {
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  transform: scale(1.02);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card_wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
 }
 
 .card_image_container {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 220px;
   overflow: hidden;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .card_image_container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease;
+}
+
+/* Image loading optimizations */
+.image_placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.loading_spinner_small {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e2e8f0;
+  border-top: 2px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.card_image_container {
+  position: relative;
+  overflow: hidden;
+}
+
+.card_image_container img {
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .card:hover .card_image_container img {
-  transform: scale(1.1);
-}
-
-.text_medium {
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  font-weight: 500;
-  color: #64748b;
-  margin: 0;
-  letter-spacing: 0.3px;
+  transform: scale(1.05);
 }
 
 .card_content {
   padding: 1.5rem;
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-.card_content p {
-  margin: 0;
 }
 
 .card_title {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.35rem;
-  line-height: 1.4;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: #1e293b;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
 }
 
 .card_info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: auto;
 }
 
+.text_medium {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 400;
+}
+.card_info {
+  display: flex;
+  align-self: end;
+  align-items: center;
+}
 .card_price {
-  font-family: 'Comfortaa', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
-  color: #667eea;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 0.5px;
-}
-
-.card:hover {
-  transform: translateY(-7px);
-}
-
-.introduction_home {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border-radius: 16px;
-  border: 2px dashed #cbd5e1;
-  margin: 2rem 0;
-}
-
-.intro_text {
-  color: #64748b;
-  font-size: 1.125rem;
-  font-weight: 500;
-}
-
-.intro_text p {
+  color: #ff6b6b;
   margin: 0;
-  padding: 1rem;
-  font-size: 1.25rem;
-  color: #475569;
 }
 
 /* Page Header Styles */
 .page_header {
   text-align: center;
   margin-bottom: 3rem;
-  padding: 2rem 0;
 }
 
 .page_title {
   font-family: 'Poppins', sans-serif;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0 0 1rem 0;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+  margin-bottom: 1rem;
+  letter-spacing: -0.025em;
 }
 
 .page_subtitle {
-  font-family: 'Comfortaa', sans-serif;
   font-size: 1.25rem;
   color: #64748b;
-  margin: 0;
-  font-weight: 500;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0 auto 1.5rem auto;
   line-height: 1.6;
-  letter-spacing: 0.3px;
 }
 
-/* Loading Styles */
+.header_actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.header_actions button {
+  min-width: 140px;
+}
+
+/* Introduction Section */
+.introduction_home {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.intro_text {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.intro_text h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.intro_text p {
+  font-size: 1.125rem;
+  color: #64748b;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.empty_icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.buttuns {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Remove button for hobby cards */
+.remove_btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer !important;
+  transition: all 0.3s ease;
+  font-size: 1.125rem;
+  z-index: 15 !important;
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  pointer-events: auto !important;
+}
+
+.card_wrapper .remove_btn {
+  opacity: 0.8;
+  transform: scale(0.9);
+  pointer-events: auto !important;
+  position: absolute;
+  z-index: 20 !important;
+}
+
+.card_wrapper:hover .remove_btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.remove_btn:hover {
+  background: #ee5a52 !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4) !important;
+}
+
+/* Ensure card wrapper doesn't interfere with button interactions */
+.card_wrapper .card {
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.card_wrapper .remove_btn:hover {
+  z-index: 25 !important;
+}
+
+/* Loading States */
 .loading_container {
   display: flex;
   flex-direction: column;
@@ -204,12 +300,13 @@
 }
 
 .loading_spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #e2e8f0;
-  border-top: 4px solid #667eea;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-left: 3px solid #667eea;
   border-radius: 50%;
+  width: 50px;
+  height: 50px;
   animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
 }
 
 @keyframes spin {
@@ -218,82 +315,9 @@
 }
 
 .loading_text {
-  margin-top: 1rem;
+  font-size: 1.125rem;
   color: #64748b;
-  font-size: 1rem;
   font-weight: 500;
-}
-
-/* Enhanced Empty State */
-.empty_icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-}
-
-.intro_text h3 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin: 0 0 0.5rem 0;
-  letter-spacing: -0.01em;
-}
-
-.explore_btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  background: #667eea;
-  color: white;
-  border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-  margin-top: 1.5rem;
-}
-
-.explore_btn:hover {
-  background: #5a6fd8;
-}
-
-/* Card Wrapper with Remove Button */
-.card_wrapper {
-  position: relative;
-  height: 100%;
-}
-
-.remove_btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #ff6b6b;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  z-index: 10;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-}
-
-.remove_btn:hover {
-  background: #ee5a52;
-}
-
-.remove_btn:active {
-  background: #e53e3e;
-}
-
-.remove_icon {
-  font-size: 1.2rem;
 }
 
 /* Responsive Design */
@@ -372,156 +396,5 @@
     font-size: 0.9rem;
     padding: 0.75rem 1.5rem;
     letter-spacing: 0.6px;
-  }
-}
-
-/* Tablet and medium screen adjustments */
-@media (max-width: 1024px) and (min-width: 769px) {
-  .cards {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
-    gap: 1.5rem;
-  }
-}
-
-/* Large screen adjustments - limit to 3 cards per row max */
-@media (min-width: 1200px) {
-  .cards {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
-    max-width: 1400px;
-  }
-}
-
-.intro_text {
-  margin: auto;
-  padding-bottom: 30px;
-  margin-bottom: 100px;
-}
-.intro_text h1 {
-  font-size: 44px;
-  font-weight: 900;
-  background: linear-gradient(to right, #494969, #696989);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.intro_text p {
-  width: 280px;
-  margin: auto;
-  margin-top: 5px;
-  font-size: 14px;
-  color: #585772;
-}
-
-/* .cta */
-/* Button container fixes */
-.buttuns {
-  padding: 20px 0px 0px 0px;
-  width: auto;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.buttuns a {
-  position: relative;
-  z-index: 1;
-  pointer-events: auto;
-}
-/* .cta_second */
-.btn {
-  border: 2px solid #c36cbb;
-  background: #c36cbb;
-  color: white;
-  width: 150px;
-  height: 50px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-}
-
-/* .cta_second_s */
-.link {
-  color: #c36cbb;
-  background: #c36cbb;
-  width: 150px;
-  height: 50px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  border: 2px solid #c36cbb;
-}
-@media all and (min-width: 1024px) {
-  .hobbie_container_home {
-    position: relative;
-    top: 80%;
-  }
-}
-@media all and (max-width: 1400px) {
-  .hobbie_container_home {
-    width: 100%;
-  }
-}
-@media all and (min-width: 850px) {
-  .intro_text {
-    position: relative;
-    left: 60px;
-  }
-
-  .intro {
-    font-size: 14px;
-  }
-}
-
-@media all and (max-width: 950px) {
-  .hobbie_container_home {
-    width: 100%;
-    padding: 20px;
-  }
-}
-
-@media all and (max-width: 767px) {
-  .intro_text {
-    margin-top: 30px;
-    font-size: small;
-    width: 100%;
-    padding-left: 10%;
-  }
-
-  .hobbie_main {
-    margin: 0%;
-    margin-bottom: 5%;
-  }
-
-  .hobbie_container_home {
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-  }
-
-  .hobbie_home_content {
-    background-color: transparent;
-    margin: 0;
-  }
-
-  .rapper {
-    width: 100%;
-    height: auto;
-    margin: auto;
-  }
-
-  .text_medium {
-    font-size: 14px;
-  }
-
-  .cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-row-gap: 20px;
-  }
-
-  .card_price {
-    font-size: auto;
-    padding-left: 5px;
   }
 }

@@ -1,21 +1,9 @@
+import React from "react";
 import axios from "axios";
-import config from "../config/config";
-
-const HomeDataService = () => {
-  try {
-    return axios.get(`${config.API_BASE_URL}/`);
-  } catch (err) {
-    let error = "";
-    if (err.response) {
-      error += err.response;
-    }
-    return error;
-  }
-};
 
 const HomeService = () => {
   try {
-    return axios.get(`${config.API_BASE_URL}/`);
+    return axios.get("http://localhost:8080/");
   } catch (err) {
     let error = "";
     if (err.response) {

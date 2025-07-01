@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../../../../css/Test.module.css";
-import hobbyBtnStyles from "../../../../../css/SimpleButtons.module.css";
 import style from "../../../../../css/Footer.module.css";
 import layout from "../../../../../css/UserHome.module.css";
 import BackgroundHome from "../../../fragments/background/BackgroundHome";
@@ -18,76 +17,76 @@ const TestForm = () => {
 
   const questions = [
     {
-      questionText: "What type of hobby experience are you looking for?",
+      questionText: "What is missing in your life?",
       value: "categoryOne",
       answerOptions: [
-        { answerText: "Fun & Entertainment", category: "FUN" },
-        { answerText: "Learning & Growth", category: "INTELLECTUAL" },
-        { answerText: "Active & Physical", category: "ACTIVE" },
-        { answerText: "Creative & Artistic", category: "CREATIVE" },
+        { answerText: "Excitement", category: "FUN" },
+        { answerText: "Mental stimulation", category: "INTELLECTUAL" },
+        { answerText: "Pushing my boundaries", category: "ACTIVE" },
+        { answerText: "Creativity", category: "CREATIVE" },
       ],
     },
     {
-      questionText: "Do you enjoy learning with others?",
+      questionText: "Do you enjoy social activities?",
       value: "categoryTwo",
       answerOptions: [
-        { answerText: "Yes, I love group activities", category: "SOCIAL" },
-        { answerText: "I prefer one-on-one learning", category: "OTHER" },
-        { answerText: "Sometimes, depends on the hobby", category: "SOCIAL" },
-        { answerText: "I like to learn solo first", category: "OTHER" },
+        { answerText: "Yes", category: "SOCIAL" },
+        { answerText: "No", category: "OTHER" },
+        { answerText: "Sometimes", category: "SOCIAL" },
+        { answerText: "Not sure", category: "OTHER" },
       ],
     },
     {
-      questionText: "How active do you like to be in your free time?",
+      questionText: "Are you an active person?",
       value: "categoryThree",
       answerOptions: [
-        { answerText: "Very active - I love movement", category: "ACTIVE" },
-        { answerText: "Prefer relaxed activities", category: "OTHER" },
-        { answerText: "Mix of both active and calm", category: "ACTIVE" },
-        { answerText: "Depends on my mood", category: "OTHER" },
+        { answerText: "Yes", category: "ACTIVE" },
+        { answerText: "No", category: "OTHER" },
+        { answerText: "Sometimes", category: "ACTIVE" },
+        { answerText: "Not sure", category: "OTHER" },
       ],
     },
     {
-      questionText: "What sounds most appealing for your weekend?",
+      questionText: "How did you spend your last weekend?",
       value: "categoryFour",
       answerOptions: [
-        { answerText: "Learning a new skill online", category: "INTELLECTUAL" },
-        { answerText: "Relaxing creative activities", category: "RELAX" },
-        { answerText: "Outdoor adventures", category: "ACTIVE" },
-        { answerText: "Trying something completely new", category: "OTHER" },
+        { answerText: "On the computer", category: "INTELLECTUAL" },
+        { answerText: "On the couch", category: "RELAX" },
+        { answerText: "Outside", category: "ACTIVE" },
+        { answerText: "Other", category: "OTHER" },
       ],
     },
     {
-      questionText: "What type of environment energizes you?",
+      questionText: "Where did you spent your last vacation?",
       value: "categoryFive",
       answerOptions: [
-        { answerText: "Mountains & nature", category: "ACTIVE" },
-        { answerText: "Cozy studios & cafes", category: "RELAX" },
-        { answerText: "Comfortable home space", category: "RELAX" },
-        { answerText: "Bustling creative spaces", category: "OTHER" },
+        { answerText: "In the mountains", category: "ACTIVE" },
+        { answerText: "On the beach", category: "RELAX" },
+        { answerText: "At home", category: "RELAX" },
+        { answerText: "Other", category: "OTHER" },
       ],
     },
     {
-      questionText: "What would you most like to hear someone say about you?",
+      questionText: "What is the best compliment you've ever received?",
       value: "categorySix",
       answerOptions: [
-        { answerText: "You're so creative and inspiring", category: "CREATIVE" },
-        { answerText: "You're really active and energetic", category: "ACTIVE" },
-        { answerText: "You're thoughtful and smart", category: "INTELLECTUAL" },
-        { answerText: "You're fun to be around", category: "SOCIAL" },
+        { answerText: "You are creative", category: "CREATIVE" },
+        { answerText: "You are fit", category: "ACTIVE" },
+        { answerText: "You are smart", category: "INTELLECTUAL" },
+        { answerText: "You are a good person", category: "SOCIAL" },
       ],
     },
     {
-      questionText: "How much time can you commit to a new hobby?",
+      questionText: "Are you willing to commit?",
       value: "categorySeven",
       answerOptions: [
-        { answerText: "I'm all in - regular commitment", category: "OTHER" },
-        { answerText: "Weekends and evenings", category: "OTHER" },
+        { answerText: "Yes, always", category: "OTHER" },
+        { answerText: "Sometimes", category: "OTHER" },
         {
-          answerText: "Occasional sessions when I have time",
+          answerText: "Only if I find the perfect activity",
           category: "OTHER",
         },
-        { answerText: "Just want to try once or twice", category: "OTHER" },
+        { answerText: "No", category: "OTHER" },
       ],
     },
     {
@@ -138,13 +137,13 @@ const TestForm = () => {
         {currentQuestion === questions.length && (
           <div className={styles.test_form_end}>
             <section className={styles.test_end}>
-              🎉 Amazing! Your hobby personality is ready! <br></br>
-              Discover hobby professionals and experiences matched just for you!{" "}
+              Thank you! Please visit your homepage to discover your new hobby!{" "}
               <br></br>
-              <Link to="/user-home" className={`${hobbyBtnStyles.hobby_btn_primary} ${hobbyBtnStyles.multi_line}`}>
-                <span className={hobbyBtnStyles.btn_icon}>🎯</span>
-                <span className={hobbyBtnStyles.btn_text}>Find My Hobby Matches</span>
-              </Link>
+              <button type="submit" className={styles.button}>
+                <Link to="/user-home" className={styles.link_home}>
+                  Discover
+                </Link>
+              </button>
             </section>
           </div>
         )}

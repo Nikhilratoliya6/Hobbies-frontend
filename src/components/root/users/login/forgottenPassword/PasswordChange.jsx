@@ -32,22 +32,13 @@ const PasswordChange = () => {
 
     if (Object.keys(errors).length === 0) {
       setLoading(true);
-      setFound(true); // Reset found state
-      
-      try {
-        const res = await UserEmailDataService(email);
-        console.log("Response status:", res.status);
+      const res = await UserEmailDataService(email);
+      console.log(res.status);
 
-        if (res.status === 200) {
-          setSent(true);
-          setFound(true);
-          setLoading(false);
-        } else {
-          setLoading(false);
-          setFound(false);
-        }
-      } catch (error) {
-        console.error("Error sending password reset:", error);
+      if (res.status === 200) {
+        setSent(true);
+        setFound(true);
+      } else {
         setLoading(false);
         setFound(false);
       }
@@ -58,14 +49,9 @@ const PasswordChange = () => {
     <>
       <main>
         <form className={styles.form_style}>
-          <div className={styles.form_title}>
-            <h1>Reset Your Password</h1>
-            <p>Enter your email address and we'll send you a link to reset your password.</p>
-          </div>
-          
           {!found && (
             <div className={styles.midErrors}>
-              No JoynUp account found with this email address. Please check and try again.
+              User with this email doesn't exist
             </div>
           )}
 
@@ -74,13 +60,11 @@ const PasswordChange = () => {
               <div className={styles.form_field}>
                 <section className={styles.name_section}>
                   <input
-                    type="email"
+                    type="text"
                     id="email"
                     name="email"
-                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    placeholder="Enter your email"
                   />
                   <label
                     htmlFor="email"
@@ -100,18 +84,18 @@ const PasswordChange = () => {
               {loading && <LoadingDotsDark className={styles.dots} />}
 
               {!loading && (
-                <button type="submit" className={styles.button} onClick={sentClicked}>
-                  Send Reset Link
+                <button className={styles.button} onClick={sentClicked}>
+                  Submit
                 </button>
               )}
             </div>
           )}
           {sent && (
-            <div className={styles.success_message}>
+            <div>
               <div className={styles.form_field}>
                 <section className={styles.name_section}>
                   <span className={styles.content_name}>
-                    🎉 Reset link sent! Please check your email and follow the instructions to reset your password.
+                    Thank you, please check your email.
                   </span>
                 </section>
               </div>

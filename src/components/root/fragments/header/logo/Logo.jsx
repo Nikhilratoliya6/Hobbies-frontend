@@ -14,6 +14,11 @@ const Logo = () => {
     <section className={styles.logo_container}>
       {!isBusinessLoggedIn && !isUserLoggedIn && (
         <NavLink onClick={() => navigate("/")} to="/" className="">
+          <img className={styles.imgHeader} src={logo} alt="logo" />
+        </NavLink>
+      )}
+      {!isBusinessLoggedIn && !isUserLoggedIn && (
+        <NavLink onClick={() => navigate("/")} to="/" className="">
           <h4 className={styles.logo}>JoynUp</h4>
         </NavLink>
       )}
@@ -24,10 +29,28 @@ const Logo = () => {
           to="/business-home"
           className=""
         >
+          <img className={styles.imgHeader} src={logo} alt="logo" />
+        </NavLink>
+      )}
+      {isBusinessLoggedIn && (
+        <NavLink
+          onClick={() => navigate("/business-home")}
+          to="/business-home"
+          className=""
+        >
           <h4 className={styles.logo}>JoynUp</h4>
         </NavLink>
       )}
 
+      {isUserLoggedIn && (
+        <NavLink
+          onClick={() => navigate("/user-home")}
+          to="/user-home"
+          className=""
+        >
+          <img className={styles.imgHeader} src={logo} alt="logo" />
+        </NavLink>
+      )}
       {isUserLoggedIn && (
         <NavLink
           onClick={() => navigate("/user-home")}

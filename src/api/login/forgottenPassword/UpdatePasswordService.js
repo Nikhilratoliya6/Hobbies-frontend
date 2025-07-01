@@ -1,11 +1,10 @@
 import axios from "axios";
-import config from "../../../config/config";
 
 const UpdatePasswordService = (id, password) => {
   console.log(id, password);
 
   try {
-    return axios.put(`${config.API_BASE_URL}/password`, null, {
+    return axios.put(`http://localhost:8080/password`, null, {
       params: {
         id,
         password,

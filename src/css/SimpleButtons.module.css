@@ -1,27 +1,28 @@
-/* Simple Button Styles for Hobbies App */
+/* Modern Button Theme for JoynUp */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
-/* Primary hobby-themed colors - very light backgrounds */
+/* Primary JoynUp-themed colors */
 :root {
-  --hobby-orange: #ffe6e6;
-  --hobby-orange-dark: #ffd9d9;
-  --hobby-teal: #e6fffe;
-  --hobby-teal-dark: #d9fffc;
-  --hobby-purple: #f0fff4;
-  --hobby-purple-dark: #e8ffe8;
-  --hobby-pink: #fdf2ff;
-  --hobby-pink-dark: #fae6ff;
-  --hobby-yellow: #fffbf0;
-  --hobby-yellow-dark: #fff5e6;
-  --hobby-blue: #f0f8ff;
-  --hobby-blue-dark: #e6f4ff;
+  --joynup-orange: #ff6b6b;
+  --joynup-orange-dark: #ee5a52;
+  --joynup-teal: #4ecdc4;
+  --joynup-teal-dark: #44a08d;
+  --joynup-purple: #a8e6cf;
+  --joynup-purple-dark: #88d8a3;
+  --joynup-pink: #f093fb;
+  --joynup-pink-dark: #f5576c;
+  --joynup-yellow: #ffecd2;
+  --joynup-yellow-dark: #fcb69f;
+  --joynup-blue: #74b9ff;
+  --joynup-blue-dark: #0984e3;
 }
 
-/* Simple button styles - SOLID BLACK TEXT */
+/* JoynUp-themed modern buttons */
 .hobby_btn_primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--hobby-orange);
+  background: var(--joynup-orange);
   color: #000000;
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
@@ -34,6 +35,7 @@
   text-decoration: none;
   position: relative;
   z-index: 1;
+  pointer-events: auto;
   border: 1px solid #e5e7eb;
   min-height: 48px;
   flex-wrap: wrap;
@@ -42,7 +44,7 @@
 }
 
 .hobby_btn_primary:hover {
-  background: var(--hobby-orange-dark);
+  background: var(--joynup-orange-dark);
   color: #000000;
 }
 
@@ -50,7 +52,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--hobby-teal);
+  background: var(--joynup-teal);
   color: #000000;
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
@@ -63,6 +65,7 @@
   text-decoration: none;
   position: relative;
   z-index: 1;
+  pointer-events: auto;
   border: 1px solid #e5e7eb;
   min-height: 48px;
   flex-wrap: wrap;
@@ -71,7 +74,7 @@
 }
 
 .hobby_btn_success:hover {
-  background: var(--hobby-teal-dark);
+  background: var(--joynup-teal-dark);
   color: #000000;
 }
 
@@ -79,7 +82,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--hobby-pink);
+  background: var(--joynup-pink);
   color: #000000;
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
@@ -92,6 +95,7 @@
   text-decoration: none;
   position: relative;
   z-index: 1;
+  pointer-events: auto;
   border: 1px solid #e5e7eb;
   min-height: 48px;
   flex-wrap: wrap;
@@ -100,7 +104,7 @@
 }
 
 .hobby_btn_danger:hover {
-  background: var(--hobby-pink-dark);
+  background: var(--joynup-pink-dark);
   color: #000000;
 }
 
@@ -108,7 +112,37 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--hobby-yellow);
+  background: var(--joynup-yellow);
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+  border: 1px solid #e5e7eb;
+  min-height: 48px;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.hobby_btn_warning:hover {
+  background: var(--joynup-yellow-dark);
+  color: #000000;
+}
+
+.hobby_btn_info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--joynup-blue);
   color: #000000;
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
@@ -128,285 +162,157 @@
   overflow: visible;
 }
 
-.hobby_btn_warning:hover {
-  background: var(--hobby-yellow-dark);
-  color: #000000;
-}
-
-.hobby_btn_info {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--hobby-blue);
-  color: #000000;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 900;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-decoration: none;
-  position: relative;
-  z-index: 1;
-  border: 1px solid #e5e7eb;
-}
-
 .hobby_btn_info:hover {
-  background: var(--hobby-blue-dark);
+  background: var(--joynup-blue-dark);
   color: #000000;
 }
 
-/* Ensure all hobby buttons are clickable */
+/* Ensure all buttons are clickable */
 .hobby_btn_primary,
-.hobby_btn_success, 
+.hobby_btn_success,
 .hobby_btn_danger,
 .hobby_btn_warning,
 .hobby_btn_info {
   pointer-events: auto !important;
-  user-select: none;
-}
-
-.hobby_btn_primary *,
-.hobby_btn_success *,
-.hobby_btn_danger *,
-.hobby_btn_warning *,
-.hobby_btn_info * {
-  pointer-events: none;
-}
-
-/* Force all text in buttons to be solid black - polished look */
-.hobby_btn_primary,
-.hobby_btn_primary:hover,
-.hobby_btn_primary:focus,
-.hobby_btn_primary:active,
-.hobby_btn_success,
-.hobby_btn_success:hover,
-.hobby_btn_success:focus,
-.hobby_btn_success:active,
-.hobby_btn_danger,
-.hobby_btn_danger:hover,
-.hobby_btn_danger:focus,
-.hobby_btn_danger:active,
-.hobby_btn_warning,
-.hobby_btn_warning:hover,
-.hobby_btn_warning:focus,
-.hobby_btn_warning:active,
-.hobby_btn_info,
-.hobby_btn_info:hover,
-.hobby_btn_info:focus,
-.hobby_btn_info:active {
-  color: #000000 !important;
-}
-
-/* Force all child text elements to be black */
-.hobby_btn_primary *,
-.hobby_btn_primary:hover *,
-.hobby_btn_success *,
-.hobby_btn_success:hover *,
-.hobby_btn_danger *,
-.hobby_btn_danger:hover *,
-.hobby_btn_warning *,
-.hobby_btn_warning:hover *,
-.hobby_btn_info *,
-.hobby_btn_info:hover * {
-  color: #000000 !important;
-  font-weight: 900 !important;
-}
-
-.hobby_btn_primary .btn_icon,
-.hobby_btn_success .btn_icon,
-.hobby_btn_danger .btn_icon,
-.hobby_btn_warning .btn_icon,
-.hobby_btn_info .btn_icon {
-  margin-right: 8px;
-  font-size: 1.4rem;
   position: relative;
-  z-index: 2;
-  transition: none;
-  filter: none;
-  color: #000000 !important;
+  z-index: 10;
+  cursor: pointer !important;
 }
 
-/* Button text and icon styles - BLACK POLISHED TEXT */
-.hobby_btn_primary .btn_text,
-.hobby_btn_primary:hover .btn_text {
-  color: #000000 !important;
-  position: relative;
-  z-index: 2;
-  font-weight: 900;
-  font-size: 1.1rem;
-  transition: color 0.2s ease;
-  text-shadow: none;
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.hobby_btn_success .btn_text,
-.hobby_btn_success:hover .btn_text {
-  color: #000000 !important;
-  position: relative;
-  z-index: 2;
-  font-weight: 900;
-  font-size: 1.1rem;
-  transition: color 0.2s ease;
-  text-shadow: none;
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.hobby_btn_danger .btn_text,
-.hobby_btn_danger:hover .btn_text {
-  color: #000000 !important;
-  position: relative;
-  z-index: 2;
-  font-weight: 900;
-  font-size: 1.1rem;
-  transition: color 0.2s ease;
-  text-shadow: none;
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.hobby_btn_info .btn_text,
-.hobby_btn_info:hover .btn_text {
-  color: #000000 !important;
-  position: relative;
-  z-index: 2;
-  font-weight: 900;
-  font-size: 1.1rem;
-  transition: color 0.2s ease;
-  text-shadow: none;
-  letter-spacing: 0.5px;
-}
-
-.hobby_btn_warning .btn_text,
-.hobby_btn_warning:hover .btn_text {
-  color: #000000 !important;
-  position: relative;
-  z-index: 2;
-  font-weight: 900;
-  font-size: 1.1rem;
-  transition: color 0.2s ease;
-  text-shadow: none;
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-  white-space: nowrap;
-  text-align: center;
-}
-
-/* Enhanced button text wrapping and coverage */
-.hobby_btn_primary .btn_text,
-.hobby_btn_success .btn_text,
-.hobby_btn_danger .btn_text,
-.hobby_btn_warning .btn_text,
-.hobby_btn_info .btn_text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.2;
-  flex: 1;
-  text-align: center;
-}
-
-/* For longer text, allow wrapping */
-.hobby_btn_primary.multi_line .btn_text,
-.hobby_btn_success.multi_line .btn_text,
-.hobby_btn_danger.multi_line .btn_text,
-.hobby_btn_warning.multi_line .btn_text,
-.hobby_btn_info.multi_line .btn_text {
-  white-space: normal;
-  word-break: break-word;
-  hyphens: auto;
-}
-
-/* Multi-line button class */
-.multi_line {
-  padding: 16px 32px;
-  min-height: 60px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.multi_line .btn_text {
-  white-space: normal !important;
-  line-height: 1.3;
-  font-size: 1rem;
-}
-
-/* Ensure button has minimum width to accommodate text */
+/* Additional clickability and shape improvements */
 .hobby_btn_primary,
 .hobby_btn_success,
 .hobby_btn_danger,
 .hobby_btn_warning,
 .hobby_btn_info {
-  min-width: fit-content;
-  max-width: 100%;
-  width: auto;
-  flex-wrap: nowrap;
+  /* Enhanced button shape */
+  border-radius: 12px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  border: 2px solid transparent !important;
+  
+  /* Enhanced clickability */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  
+  /* Ensure proper sizing */
+  min-width: 120px;
+  min-height: 48px;
+  
+  /* Enhanced interaction feedback */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Enhanced hover states for better feedback */
+.hobby_btn_primary:hover,
+.hobby_btn_success:hover,
+.hobby_btn_danger:hover,
+.hobby_btn_warning:hover,
+.hobby_btn_info:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Active states for immediate feedback */
+.hobby_btn_primary:active,
+.hobby_btn_success:active,
+.hobby_btn_danger:active,
+.hobby_btn_warning:active,
+.hobby_btn_info:active {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Focus states for accessibility */
+.hobby_btn_primary:focus,
+.hobby_btn_success:focus,
+.hobby_btn_danger:focus,
+.hobby_btn_warning:focus,
+.hobby_btn_info:focus {
+  outline: 3px solid rgba(102, 126, 234, 0.4) !important;
+  outline-offset: 2px !important;
+}
+
+/* Disabled button states */
+.hobby_btn_primary:disabled,
+.hobby_btn_success:disabled,
+.hobby_btn_danger:disabled,
+.hobby_btn_warning:disabled,
+.hobby_btn_info:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  transform: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Loading state */
+.hobby_btn_loading {
+  position: relative;
+  color: transparent !important;
+}
+
+.hobby_btn_loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: button-spin 1s linear infinite;
+}
+
+@keyframes button-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Button groups */
 .btn_group {
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
-  margin: 1.5rem 0;
-}
-
-.btn_group > * {
-  flex: 0 0 auto;
-  min-width: fit-content;
-}
-
-/* Special styling for buttons with longer text */
-.btn_group {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  margin: 1.5rem 0;
+  flex-wrap: wrap;
+  margin: 2rem 0;
 }
 
-.btn_group > * {
-  flex: 0 0 auto;
-  min-width: fit-content;
+.btn_group_vertical {
+  flex-direction: column;
+  align-items: stretch;
 }
 
-/* For mobile, stack buttons vertically */
-@media (max-width: 768px) {
-  .btn_group {
-    flex-direction: column;
-    gap: 0.75rem;
-    width: 100%;
-  }
-  
-  .btn_group > * {
-    width: 100%;
-    max-width: 280px;
-  }
+/* Icon and text styling */
+.btn_icon {
+  margin-right: 0.5rem !important;
+  font-size: 1.1rem !important;
+  line-height: 1 !important;
+  display: inline-block !important;
 }
 
+.btn_text {
+  font-weight: 900 !important;
+  font-size: 1rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .hobby_btn_primary,
   .hobby_btn_success,
   .hobby_btn_danger,
   .hobby_btn_warning,
   .hobby_btn_info {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    min-width: 120px;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    min-width: 140px;
+    letter-spacing: 0.6px;
   }
   
   .btn_group {
@@ -421,14 +327,16 @@
   .hobby_btn_danger,
   .hobby_btn_warning,
   .hobby_btn_info {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-    min-width: 100px;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    min-width: 120px;
+    letter-spacing: 0.4px;
+    font-weight: 800;
   }
   
   .btn_group {
-    flex-direction: column;
     gap: 0.5rem;
     margin: 1rem 0;
+    flex-direction: column;
   }
 }

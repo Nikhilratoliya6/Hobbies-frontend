@@ -4,12 +4,13 @@ import styles from "../../../../css/UserHome.module.css";
 import hobbyBtnStyles from "../../../../css/SimpleButtons.module.css";
 import style from "../../../../css/Footer.module.css";
 import BackgroundHome from "../../fragments/background/BackgroundHome";
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import MyHobbiesDataService from "../../../../api/hobby/MyHobbiesDataService";
 import RemoveHobbyService from "../../../../api/hobby/RemoveHobbyService";
 import Toast from "../../../common/Toast";
+import SavedHobbyCard from "../../../common/SavedHobbyCard";
 
 const MyHobbies = () => {
   const navigate = useNavigate();
@@ -18,28 +19,32 @@ const MyHobbies = () => {
   const [welcomeDiv, setWelcomeDiv] = useState({ showDiv: false });
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState({ show: false, message: '', type: '' });
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleSort = (value) => (event) => {
+  const handleSort = useCallback((value) => (event) => {
     event.preventDefault();
     let path = "/hobbie/" + value;
     navigate(path, { state: { id: value } });
-  };
+  }, [navigate]);
 
-  const handleRemoveHobby = (hobbyId) => (event) => {
+  const handleRemoveHobby = useCallback((hobbyId) => (event) => {
     event.preventDefault();
     event.stopPropagation();
     
     RemoveHobbyService(hobbyId).then((response) => {
-      setState(prevState => prevState.filter(hobby => hobby.id !== hobbyId));
+      setState(prevState => {
+        const newState = prevState.filter(hobby => hobby.id !== hobbyId);
+        // Update welcome div based on new state length
+        if (newState.length === 0) {
+          setWelcomeDiv({ showDiv: true });
+        }
+        return newState;
+      });
       setToast({
         show: true,
         message: 'Hobby removed from your favorites! 💔',
         type: 'info'
       });
-      
-      if (state.length === 1) {
-        setWelcomeDiv({ showDiv: true });
-      }
     }).catch((error) => {
       setToast({
         show: true,
@@ -47,38 +52,90 @@ const MyHobbies = () => {
         type: 'error'
       });
     });
-  };
+  }, []); // Remove state.length dependency
 
   const closeToast = () => {
     setToast({ show: false, message: '', type: '' });
   };
 
+  const refreshHobbies = async () => {
+    setRefreshKey(prev => prev + 1);
+    try {
+      await loadHobbies(true); // Force refresh from API
+      setToast({
+        show: true,
+        message: 'Your hobbies have been refreshed! 🔄',
+        type: 'success'
+      });
+    } catch (error) {
+      // Error is already handled in loadHobbies
+    }
+  };
+
+  const loadHobbies = async (forceRefresh = false) => {
+    setLoading(true);
+    try {
+      const response = await MyHobbiesDataService(forceRefresh);
+      console.log('Fetched saved hobbies response:', response);
+      console.log('Response data:', response.data);
+      
+      // More robust data validation
+      let hobbies = [];
+      if (response && response.data) {
+        if (Array.isArray(response.data)) {
+          hobbies = response.data;
+        } else if (typeof response.data === 'object' && response.data.length !== undefined) {
+          // Handle case where data might be array-like object
+          hobbies = Array.from(response.data);
+        }
+      }
+      
+      console.log('Processed hobbies:', hobbies);
+      setState(hobbies);
+      setWelcomeDiv({ showDiv: hobbies.length === 0 });
+      
+    } catch (error) {
+      console.error('Error fetching saved hobbies:', error);
+      setState([]);
+      setWelcomeDiv({ showDiv: true });
+      setToast({
+        show: true,
+        message: 'Failed to load your saved hobbies. Please try again.',
+        type: 'error'
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useLayoutEffect(() => {
     let unmounted = false;
-    setLoading(true);
-
-    MyHobbiesDataService().then((response) => {
+    console.log('MyHobbies useLayoutEffect triggered, refreshKey:', refreshKey);
+    
+    const loadData = async () => {
       if (!unmounted) {
-        setState(response.data);
-        setWelcomeDiv({ showDiv: false });
-        setLoading(false);
+        console.log('Loading hobbies data...');
+        await loadHobbies();
       }
-      if (!Object.keys(response.data).length) {
-        setWelcomeDiv({ showDiv: true });
-        setLoading(false);
-      }
-    }).catch(() => {
-      if (!unmounted) {
-        setLoading(false);
-        setWelcomeDiv({ showDiv: true });
-      }
-    });
+    };
+    
+    loadData();
     
     return () => {
+      console.log('MyHobbies component cleanup');
       unmounted = true;
     };
-  }, []);
+  }, [refreshKey]); // Add refreshKey as dependency
 
+  // Add debugging for state changes
+  React.useEffect(() => {
+    console.log('State changed:', {
+      hobbiesCount: state.length,
+      loading,
+      welcomeDiv: welcomeDiv.showDiv,
+      hobbies: state
+    });
+  }, [state, loading, welcomeDiv]);
   return (
     <>
       <Toast 
@@ -95,6 +152,18 @@ const MyHobbies = () => {
             <p className={styles.page_subtitle}>
               Your saved hobby experiences and creative connections
             </p>
+            <div className={styles.header_actions}>
+              <button 
+                onClick={refreshHobbies}
+                className={hobbyBtnStyles.hobby_btn_secondary}
+                disabled={loading}
+              >
+                <span className={hobbyBtnStyles.btn_icon}>🔄</span>
+                <span className={hobbyBtnStyles.btn_text}>
+                  {loading ? 'Loading...' : 'Refresh'}
+                </span>
+              </button>
+            </div>
           </div>
 
           {loading && (
@@ -107,39 +176,13 @@ const MyHobbies = () => {
           {!loading && state.length > 0 && (
             <section className={styles.cards}>
               {state.map((hobby, index) => (
-                <div 
-                  key={hobby.id} 
-                  className={`${styles.rapper} fade-in-up`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className={styles.card_wrapper}>
-                    <Link
-                      to="#"
-                      onClick={handleSort(hobby.id)}
-                      className={styles.card}
-                      id={hobby.id}
-                    >
-                      <section className={styles.card_image_container}>
-                        <img src={hobby.profileImgUrl} alt="hobby" />
-                      </section>
-
-                      <section className={styles.card_content}>
-                        <p className={styles.card_title}>{hobby.name}</p>
-                        <div className={styles.card_info}>
-                          <p className={styles.text_medium}>Find out more...</p>
-                          <p className={styles.card_price}>{hobby.price} rupees</p>
-                        </div>
-                      </section>
-                    </Link>
-                    <button 
-                      className={`${styles.remove_btn} ${hobbyBtnStyles.hobby_btn_danger}`}
-                      onClick={handleRemoveHobby(hobby.id)}
-                      title="Remove from favorites"
-                    >
-                      <span className={styles.remove_icon}>💔</span>
-                    </button>
-                  </div>
-                </div>
+                <SavedHobbyCard
+                  key={hobby.id}
+                  hobby={hobby}
+                  onClick={handleSort(hobby.id)}
+                  onRemove={handleRemoveHobby(hobby.id)}
+                  animationDelay={index * 0.1}
+                />
               ))}
             </section>
           )}
@@ -150,10 +193,12 @@ const MyHobbies = () => {
                 <div className={styles.empty_icon}>🎨</div>
                 <h3>Your hobby journey starts here!</h3>
                 <p>Discover artists, musicians, bakers, and creative professionals near you. Join, assist, or just enjoy!</p>
-                <Link to="/test" className={hobbyBtnStyles.hobby_btn_primary}>
-                  <span className={hobbyBtnStyles.btn_icon}>✨</span>
-                  <span className={hobbyBtnStyles.btn_text}>Find My Hobby Tribe</span>
-                </Link>
+                <div className={styles.buttuns}>
+                  <Link to="/test" className={hobbyBtnStyles.hobby_btn_primary}>
+                    <span className={hobbyBtnStyles.btn_icon}>✨</span>
+                    <span className={hobbyBtnStyles.btn_text}>Find My Hobby Tribe</span>
+                  </Link>
+                </div>
               </div>
             </div>
           )}

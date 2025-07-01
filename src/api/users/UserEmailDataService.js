@@ -1,23 +1,18 @@
-import axios from "../customAxiosConfig/CustomAxiosConfig";
+import axios from "axios";
 
 const UserEmailDataService = async (email) => {
   try {
-    const response = await axios.post(`/notification`, null, {
+    return axios.post(`http://localhost:8080/notification`, null, {
       params: {
         email,
       },
     });
-    return response;
   } catch (err) {
-    console.error("Password reset error:", err);
+    let error = "";
     if (err.response) {
-      return err.response;
+      error += err.response;
     }
-    // If no response, return a mock response with error status
-    return {
-      status: 404,
-      data: { message: "Network error or server unavailable" }
-    };
+    return error;
   }
 };
 

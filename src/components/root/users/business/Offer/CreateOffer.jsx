@@ -16,6 +16,7 @@ const CreateOffer = () => {
   const username = AuthenticationService.getLoggedInUser();
   const [uploaded, setUploaded] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState("");
 
   const [files, setFiles] = useState({});
   const [info, setInfo] = useState({
@@ -105,13 +106,29 @@ const CreateOffer = () => {
     setErrors(errors);
     if (Object.keys(errors).length === 0) {
       setLoading(true);
+      
+      // Check if all files are selected
       const filesToUpload = [
         files.profileImgUrl,
         files.galleryImgUrl1,
         files.galleryImgUrl2,
         files.galleryImgUrl3,
       ];
-      const uploaders = filesToUpload.map(async (file) => {
+      
+      // Filter out any null or undefined files
+      const validFiles = filesToUpload.filter(file => file != null);
+      
+      if (validFiles.length !== 4) {
+        setLoading(false);
+        alert("Please select all 4 images (1 profile + 3 gallery images)");
+        return;
+      }
+      
+      console.log("Starting upload for", validFiles.length, "files");
+      setUploadProgress("Uploading images...");
+      
+      const uploaders = validFiles.map(async (file, index) => {
+        setUploadProgress(`Uploading image ${index + 1} of ${validFiles.length}...`);
         const formData = new FormData();
         formData.append("file", file);
         formData.append("tags", `dv6ktrxwv, hobbie`);
@@ -127,16 +144,26 @@ const CreateOffer = () => {
             }
           )
           .then(({ data }) => {
+            setUploadProgress(`Image ${index + 1} uploaded successfully`);
             fileURL = data.secure_url;
             const public_id = data.public_id;
             img_urls.push(fileURL);
             public_ids.push(public_id);
+          })
+          .catch((error) => {
+            console.error(`Error uploading file ${index + 1}:`, error);
+            setLoading(false);
+            setUploadProgress("");
+            throw new Error(`Failed to upload image ${index + 1}`);
           });
       });
 
       // Once all the files are uploaded
       axios.all(uploaders).then(() => {
-        console.log(img_urls[0]);
+        setUploadProgress("All images uploaded! Creating offer...");
+        console.log("All images uploaded successfully");
+        console.log("Profile image URL:", img_urls[0]);
+        console.log("Gallery images URLs:", img_urls.slice(1));
         setInfo((prevState) => ({
           ...prevState,
           profileImgUrl: img_urls[0],
@@ -149,6 +176,11 @@ const CreateOffer = () => {
           galleryImg3_id: public_ids[3],
         }));
         setUploaded(true);
+      }).catch((error) => {
+        console.error("Error uploading images:", error);
+        setLoading(false);
+        setUploadProgress("");
+        alert("Failed to upload images. Please try again.");
       });
     } else {
       console.log(errors);
@@ -180,7 +212,7 @@ const CreateOffer = () => {
   return (
     <>
       <main className={styles.offer_main}>
-        <h1 className={styles.title_offer}>Create Hobby Experience</h1>
+        <h1 className={styles.title_offer}>Create offer</h1>
         <form className={styles.form_offer} onSubmit={submitHandler}>
           <OfferInputField
             type="text"
@@ -270,63 +302,91 @@ const CreateOffer = () => {
 
           <div className={styles.form_field_photos}>
             <div className={styles.row_upload}>
-              <label id="photo" className={styles.label_name}>
-                <span className="">Gallery</span>
+              <label htmlFor="profile-image" className={styles.label_name}>
+                <span className="">Profile Image</span>
               </label>
               <article className={styles.button3}>
                 <p className={styles.choose_file}>
                   {" "}
-                  {files.profileImgUrl ? "Photo uploaded" : "Choose a file"}
+                  {files.profileImgUrl ? "Profile photo uploaded" : "Choose profile photo"}
                 </p>
                 <input
-                  onChange={(e) =>
-                    setFiles({ ...files, profileImgUrl: e.target.files[0] })
-                  }
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                      setFiles({ ...files, profileImgUrl: file });
+                    } else {
+                      alert('Please select a valid image file');
+                    }
+                  }}
                   type="file"
-                  id="add-title-image"
-                  name="img"
+                  id="profile-image"
+                  name="profileImg"
+                  accept="image/*"
+                />
+              </article>
+              
+              <label htmlFor="gallery-images" className={styles.label_name}>
+                <span className="">Gallery Images (3 photos required)</span>
+              </label>
+              <article className={styles.button3}>
+                <p className={styles.choose_file}>
+                  {" "}
+                  {files.galleryImgUrl1 ? "Gallery photo 1 uploaded" : "Choose gallery photo 1"}
+                </p>
+                <input
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                      setFiles({ ...files, galleryImgUrl1: file });
+                    } else {
+                      alert('Please select a valid image file');
+                    }
+                  }}
+                  type="file"
+                  id="gallery-image-1"
+                  name="galleryImg1"
+                  accept="image/*"
                 />
               </article>
               <article className={styles.button3}>
                 <p className={styles.choose_file}>
                   {" "}
-                  {files.galleryImgUrl1 ? "Photo uploaded" : "Choose a file"}
+                  {files.galleryImgUrl2 ? "Gallery photo 2 uploaded" : "Choose gallery photo 2"}
                 </p>
                 <input
-                  onChange={(e) =>
-                    setFiles({ ...files, galleryImgUrl1: e.target.files[0] })
-                  }
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                      setFiles({ ...files, galleryImgUrl2: file });
+                    } else {
+                      alert('Please select a valid image file');
+                    }
+                  }}
                   type="file"
-                  id="add-title-image"
-                  name="img"
+                  id="gallery-image-2"
+                  name="galleryImg2"
+                  accept="image/*"
                 />
               </article>
               <article className={styles.button3}>
                 <p className={styles.choose_file}>
                   {" "}
-                  {files.galleryImgUrl2 ? "Photo uploaded" : "Choose a file"}
+                  {files.galleryImgUrl3 ? "Gallery photo 3 uploaded" : "Choose gallery photo 3"}
                 </p>
                 <input
-                  onChange={(e) =>
-                    setFiles({ ...files, galleryImgUrl2: e.target.files[0] })
-                  }
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                      setFiles({ ...files, galleryImgUrl3: file });
+                    } else {
+                      alert('Please select a valid image file');
+                    }
+                  }}
                   type="file"
-                  id="add-title-image"
-                  name="img"
-                />
-              </article>
-              <article className={styles.button3}>
-                <p className={styles.choose_file}>
-                  {" "}
-                  {files.galleryImgUrl3 ? "Photo uploaded" : "Choose a file"}
-                </p>
-                <input
-                  onChange={(e) =>
-                    setFiles({ ...files, galleryImgUrl3: e.target.files[0] })
-                  }
-                  type="file"
-                  id="add-title-image"
-                  name="img"
+                  id="gallery-image-3"
+                  name="galleryImg3"
+                  accept="image/*"
                 />
               </article>
 
@@ -335,7 +395,7 @@ const CreateOffer = () => {
                 errors.galleryImgUrl3 ||
                 errors.profileImgUrl) && (
                 <span className={styles.errors_offer}>
-                  You must upload high quality photos
+                  You must upload all required photos
                 </span>
               )}
             </div>
@@ -348,7 +408,14 @@ const CreateOffer = () => {
             onChange={(e) => setInfo({ ...info, contactInfo: e.target.value })}
           />
 
-          {loading && <LoadingDots />}
+          {loading && (
+            <div>
+              <LoadingDots />
+              <p style={{ color: 'white', textAlign: 'center', marginTop: '10px' }}>
+                {uploadProgress}
+              </p>
+            </div>
+          )}
 
           {!loading && (
             <button type="submit" className={styles.submit_offer}>

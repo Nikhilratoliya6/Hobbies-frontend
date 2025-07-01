@@ -1,6 +1,6 @@
 {
-  "short_name": "JoynUp",
-  "name": "JoynUp - Where Hobbies Find People",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#667eea",
+  "theme_color": "#000000",
   "background_color": "#ffffff"
 }

@@ -90,64 +90,70 @@ const HobbiePages = () => {
     event.preventDefault();
 
     if (!saved) {
-      SaveHobbyService(id).then((response) => {
-        setSaved(true);
-        setToast({
-          show: true,
-          message: 'Hobby saved to your collection! 💝',
-          type: 'success'
+      SaveHobbyService(id)
+        .then((response) => {
+          setSaved(true);
+          setToast({
+            show: true,
+            message: "Hobby saved to your collection! 💝",
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          setToast({
+            show: true,
+            message: "Failed to save hobby. Please try again.",
+            type: "error",
+          });
         });
-      }).catch((error) => {
-        setToast({
-          show: true,
-          message: 'Failed to save hobby. Please try again.',
-          type: 'error'
-        });
-      });
     } else {
-      RemoveHobbyService(id).then((response) => {
-        setSaved(false);
-        setToast({
-          show: true,
-          message: 'Hobby removed from your collection.',
-          type: 'info'
+      RemoveHobbyService(id)
+        .then((response) => {
+          setSaved(false);
+          setToast({
+            show: true,
+            message: "Hobby removed from your collection.",
+            type: "info",
+          });
+        })
+        .catch((error) => {
+          setToast({
+            show: true,
+            message: "Failed to remove hobby. Please try again.",
+            type: "error",
+          });
         });
-      }).catch((error) => {
-        setToast({
-          show: true,
-          message: 'Failed to remove hobby. Please try again.',
-          type: 'error'
-        });
-      });
     }
   };
 
   const closeToast = () => {
-    setToast({ show: false, message: '', type: '' });
+    setToast({ show: false, message: "", type: "" });
   };
 
   useEffect(() => {
     let unmounted = false;
 
     if (isUserLoggedIn) {
-      IsHobbySavedService(id).then((response) => {
-        if (!unmounted) {
-          setSaved(response.data);
-          console.log(saved);
-        }
-      });
+      IsHobbySavedService(id)
+        .then((response) => {
+          if (!unmounted) {
+            setSaved(response.data);
+            console.log(saved);
+          }
+        });
     }
     if (isBusinessLoggedIn || isUserLoggedIn) {
-      HobbyDetailsDataService(id).then((response) => {
-        if (!unmounted) {
-          setHobby(response.data);
-          console.log(response.data);
-          setHobbieDiv({ showDiv: false });
-        }
-        if (!Object.keys(response.data).length) {
-          setHobbieDiv({ showDiv: true });
-        }
-      });
+      HobbyDetailsDataService(id)
+        .then((response) => {
+          if (!unmounted) {
+            setHobby(response.data);
+            console.log(response.data);
+            setHobbieDiv({ showDiv: false });
+          }
+          if (!Object.keys(response.data).length) {
+            setHobbieDiv({ showDiv: true });
+          }
+        });
     }
     return () => {
       unmounted = true;
@@ -291,40 +297,6 @@ const HobbiePages = () => {
                 </article>
               )}
 
-              {/* User Action Buttons - positioned below tabs for small screens too */}
-              {isUserLoggedIn && isColumnBasedSmall && currentPage === "about" && (
-                <div className={`${hobbyBtnStyles.btn_group} ${styles.user_actions_small}`}>
-                  <button 
-                    onClick={handleSave(hobby.id)}
-                    className={saved ? hobbyBtnStyles.hobby_btn_success : hobbyBtnStyles.hobby_btn_primary}
-                  >
-                    <span className={hobbyBtnStyles.btn_icon}>
-                      {saved ? "💖" : "🤍"}
-                    </span>
-                    <span className={hobbyBtnStyles.btn_text}>
-                      {saved ? "❤️ Saved!" : "💝 Add to Favorites"}
-                    </span>
-                  </button>
-                </div>
-              )}
-
-              {/* User Action Buttons - positioned below tabs */}
-              {isUserLoggedIn && !isColumnBasedSmall && currentPage === "about" && (
-                <div className={`${hobbyBtnStyles.btn_group} ${styles.user_actions}`}>
-                  <button 
-                    onClick={handleSave(hobby.id)}
-                    className={saved ? hobbyBtnStyles.hobby_btn_success : hobbyBtnStyles.hobby_btn_primary}
-                  >
-                    <span className={hobbyBtnStyles.btn_icon}>
-                      {saved ? "💖" : "🤍"}
-                    </span>
-                    <span className={hobbyBtnStyles.btn_text}>
-                      {saved ? "❤️ Saved!" : "💝 Add to Favorites"}
-                    </span>
-                  </button>
-                </div>
-              )}
-
               <section className={styles.hobbie_lable}>
                 {!isColumnBasedSmall && (
                   <div>
@@ -374,27 +346,47 @@ const HobbiePages = () => {
 
                 {currentPage === "contact" && <p> {hobby.contactInfo} </p>}
 
-                {/* Business Action Buttons - positioned at bottom of content */}
-                {isBusinessLoggedIn && currentPage !== "gallery" && (
+                {currentPage !== "gallery" && (
                   <article className={styles.buttons}>
-                    <div className={hobbyBtnStyles.btn_group}>
-                      <Link
-                        to="#"
-                        onClick={handleEdit(hobby)}
-                        className={hobbyBtnStyles.hobby_btn_warning}
-                      >
-                        <span className={hobbyBtnStyles.btn_icon}>✏️</span>
-                        <span className={hobbyBtnStyles.btn_text}>Edit Hobby</span>
-                      </Link>
-                      <Link
-                        to="#"
-                        onClick={handleDelete(hobby)}
-                        className={hobbyBtnStyles.hobby_btn_danger}
-                      >
-                        <span className={hobbyBtnStyles.btn_icon}>🗑️</span>
-                        <span className={hobbyBtnStyles.btn_text}>Delete</span>
-                      </Link>
-                    </div>
+                    {isBusinessLoggedIn && (
+                      <div className={hobbyBtnStyles.btn_group}>
+                        <Link
+                          to="#"
+                          onClick={handleEdit(hobby)}
+                          className={hobbyBtnStyles.hobby_btn_warning}
+                        >
+                          <span className={hobbyBtnStyles.btn_icon}>✏️</span>
+                          <span className={hobbyBtnStyles.btn_text}>Edit Hobby</span>
+                        </Link>
+                        <Link
+                          to="#"
+                          onClick={handleDelete(hobby)}
+                          className={hobbyBtnStyles.hobby_btn_danger}
+                        >
+                          <span className={hobbyBtnStyles.btn_icon}>🗑️</span>
+                          <span className={hobbyBtnStyles.btn_text}>Delete</span>
+                        </Link>
+                      </div>
+                    )}
+                    {isUserLoggedIn && (
+                      <div className={hobbyBtnStyles.btn_group}>
+                        <button
+                          onClick={handleSave(hobby.id)}
+                          className={
+                            saved
+                              ? hobbyBtnStyles.hobby_btn_success
+                              : hobbyBtnStyles.hobby_btn_primary
+                          }
+                        >
+                          <span className={hobbyBtnStyles.btn_icon}>
+                            {saved ? "💖" : "🤍"}
+                          </span>
+                          <span className={hobbyBtnStyles.btn_text}>
+                            {saved ? "❤️ Saved!" : "💝 Add to Favorites"}
+                          </span>
+                        </button>
+                      </div>
+                    )}
                   </article>
                 )}
               </section>

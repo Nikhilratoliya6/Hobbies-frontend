@@ -1,9 +1,8 @@
 import axios from "axios";
-import config from "../../config/config";
 
 // axios instance for making requests
 const axiosInstance = axios.create({
-  baseURL: config.API_BASE_URL,
+  baseURL: "http://localhost:8080",
 });
 
 // request interceptor for adding token
