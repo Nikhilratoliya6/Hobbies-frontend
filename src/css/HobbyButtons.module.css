@@ -1,0 +1,312 @@
+/* Modern Button Theme for Hobbies App */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+/* Primary hobby-themed colors */
+:root {
+  --hobby-orange: #ff6b6b;
+  --hobby-orange-dark: #ee5a52;
+  --hobby-teal: #4ecdc4;
+  --hobby-teal-dark: #44a08d;
+  --hobby-purple: #a8e6cf;
+  --hobby-purple-dark: #88d8a3;
+  --hobby-pink: #f093fb;
+  --hobby-pink-dark: #f5576c;
+  --hobby-yellow: #ffecd2;
+  --hobby-yellow-dark: #fcb69f;
+  --hobby-blue: #74b9ff;
+  --hobby-blue-dark: #0984e3;
+}
+
+/* Hobby-themed simple buttons */
+.hobby_btn_primary {
+  background: var(--hobby-orange);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hobby_btn_primary:hover {
+  background: var(--hobby-orange-dark);
+}
+
+.hobby_btn_success {
+  background: var(--hobby-teal);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hobby_btn_success:hover {
+  background: var(--hobby-teal-dark);
+}
+
+.hobby_btn_danger {
+  background: var(--hobby-pink);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hobby_btn_danger:hover {
+  background: var(--hobby-pink-dark);
+}
+
+.hobby_btn_warning {
+  background: var(--hobby-yellow);
+  color: #8b4513;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hobby_btn_warning:hover {
+  background: var(--hobby-yellow-dark);
+  color: #7c2d12;
+}
+
+.hobby_btn_info {
+  background: var(--hobby-blue);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hobby_btn_info:hover {
+  background: var(--hobby-blue-dark);
+}
+
+/* Floating Action Button */
+.fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+}
+
+.fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+}
+
+/* Button groups */
+.btn_group {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.btn_group_vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Icon buttons */
+.icon_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.25rem;
+}
+
+/* Outlined buttons */
+.hobby_btn_outline {
+  background: transparent;
+  border: 2px solid;
+  color: inherit;
+  box-shadow: none;
+}
+
+.hobby_btn_outline:hover {
+  background: currentColor;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Glass morphism buttons */
+.hobby_btn_glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.hobby_btn_glass:hover {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced Button Text Typography */
+.hobby_btn_primary .btn_text,
+.hobby_btn_success .btn_text,
+.hobby_btn_danger .btn_text,
+.hobby_btn_warning .btn_text,
+.hobby_btn_info .btn_text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+.hobby_btn_primary:hover .btn_text,
+.hobby_btn_success:hover .btn_text,
+.hobby_btn_danger:hover .btn_text,
+.hobby_btn_warning:hover .btn_text,
+.hobby_btn_info:hover .btn_text {
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced Button Icon Styles */
+.hobby_btn_primary .btn_icon,
+.hobby_btn_success .btn_icon,
+.hobby_btn_danger .btn_icon,
+.hobby_btn_warning .btn_icon,
+.hobby_btn_info .btn_icon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+  margin-right: 0.75rem;
+}
+
+.hobby_btn_primary:hover .btn_icon,
+.hobby_btn_success:hover .btn_icon,
+.hobby_btn_danger:hover .btn_icon,
+.hobby_btn_warning:hover .btn_icon,
+.hobby_btn_info:hover .btn_icon {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+}
+
+/* Additional responsive improvements for hobby buttons */
+@media (max-width: 768px) {
+  .hobby_btn_primary,
+  .hobby_btn_success,
+  .hobby_btn_danger,
+  .hobby_btn_warning,
+  .hobby_btn_info {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+    min-width: 140px;
+    letter-spacing: 0.6px;
+  }
+  
+  .btn_group {
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  
+  .fab {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hobby_btn_primary,
+  .hobby_btn_success,
+  .hobby_btn_danger,
+  .hobby_btn_warning,
+  .hobby_btn_info {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.85rem;
+    min-width: 120px;
+    letter-spacing: 0.4px;
+    font-weight: 600;
+  }
+  
+  .btn_group {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .fab {
+    bottom: 1rem;
+    right: 1rem;
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Special hover effects for hobby theme */
+.hobby_btn_primary::before,
+.hobby_btn_success::before,
+.hobby_btn_danger::before,
+.hobby_btn_warning::before,
+.hobby_btn_info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.6s;
+}
+
+.hobby_btn_primary:hover::before,
+.hobby_btn_success:hover::before,
+.hobby_btn_danger:hover::before,
+.hobby_btn_warning:hover::before,
+.hobby_btn_info:hover::before {
+  left: 100%;
+}

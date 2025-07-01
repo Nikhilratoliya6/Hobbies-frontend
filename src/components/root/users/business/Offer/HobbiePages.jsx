@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../../../../css/Hobbie.module.css";
+import hobbyBtnStyles from "../../../../../css/SimpleButtons.module.css";
 import AuthenticationService from "../../../../../api/authentication/AuthenticationService";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -11,6 +12,7 @@ import DeleteHobbyService from "../../../../../api/hobby/DeleteHobbyService";
 import IsHobbySavedService from "../../../../../api/hobby/IsHobbySavedService";
 import SaveHobbyService from "../../../../../api/hobby/SaveHobbyService";
 import RemoveHobbyService from "../../../../../api/hobby/RemoveHobbyService";
+import Toast from "../../../../common/Toast";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
@@ -19,6 +21,7 @@ const HobbiePages = () => {
   const isBusinessLoggedIn = AuthenticationService.isBusinessLoggedIn();
   let navigate = useNavigate();
   const [saved, setSaved] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: '' });
   let params = useParams();
 
   const id = params.id;
@@ -89,14 +92,38 @@ const HobbiePages = () => {
     if (!saved) {
       SaveHobbyService(id).then((response) => {
         setSaved(true);
-        console.log(saved);
+        setToast({
+          show: true,
+          message: 'Hobby saved to your collection! 💝',
+          type: 'success'
+        });
+      }).catch((error) => {
+        setToast({
+          show: true,
+          message: 'Failed to save hobby. Please try again.',
+          type: 'error'
+        });
       });
     } else {
       RemoveHobbyService(id).then((response) => {
         setSaved(false);
-        console.log(saved);
+        setToast({
+          show: true,
+          message: 'Hobby removed from your collection.',
+          type: 'info'
+        });
+      }).catch((error) => {
+        setToast({
+          show: true,
+          message: 'Failed to remove hobby. Please try again.',
+          type: 'error'
+        });
       });
     }
+  };
+
+  const closeToast = () => {
+    setToast({ show: false, message: '', type: '' });
   };
 
   useEffect(() => {
@@ -134,6 +161,12 @@ const HobbiePages = () => {
   };
   return (
     <>
+      <Toast 
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={closeToast}
+      />
       {isColumnBasedSmall && (
         <div>
           {" "}
@@ -310,30 +343,38 @@ const HobbiePages = () => {
                 {currentPage !== "gallery" && (
                   <article className={styles.buttons}>
                     {isBusinessLoggedIn && (
-                      <div>
+                      <div className={hobbyBtnStyles.btn_group}>
                         <Link
                           to="#"
                           onClick={handleEdit(hobby)}
-                          className={styles.btn}
+                          className={hobbyBtnStyles.hobby_btn_warning}
                         >
-                          Edit{" "}
+                          <span className={hobbyBtnStyles.btn_icon}>✏️</span>
+                          <span className={hobbyBtnStyles.btn_text}>Edit Hobby</span>
                         </Link>
                         <Link
                           to="#"
                           onClick={handleDelete(hobby)}
-                          className={styles.btn}
+                          className={hobbyBtnStyles.hobby_btn_danger}
                         >
-                          Delete{" "}
+                          <span className={hobbyBtnStyles.btn_icon}>🗑️</span>
+                          <span className={hobbyBtnStyles.btn_text}>Delete</span>
                         </Link>
                       </div>
                     )}
                     {isUserLoggedIn && (
-                      <div onClick={handleSave(hobby.id)}>
-                        {saved ? (
-                          <span className={styles.btn}>Remove</span>
-                        ) : (
-                          <span className={styles.btn}>Save</span>
-                        )}
+                      <div className={hobbyBtnStyles.btn_group}>
+                        <button 
+                          onClick={handleSave(hobby.id)}
+                          className={saved ? hobbyBtnStyles.hobby_btn_success : hobbyBtnStyles.hobby_btn_primary}
+                        >
+                          <span className={hobbyBtnStyles.btn_icon}>
+                            {saved ? "💖" : "🤍"}
+                          </span>
+                          <span className={hobbyBtnStyles.btn_text}>
+                            {saved ? "❤️ Saved!" : "💝 Add to Favorites"}
+                          </span>
+                        </button>
                       </div>
                     )}
                   </article>

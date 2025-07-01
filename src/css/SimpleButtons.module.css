@@ -1,0 +1,326 @@
+/* Simple Button Styles for Hobbies App */
+
+/* Primary hobby-themed colors - very light backgrounds */
+:root {
+  --hobby-orange: #ffe6e6;
+  --hobby-orange-dark: #ffd9d9;
+  --hobby-teal: #e6fffe;
+  --hobby-teal-dark: #d9fffc;
+  --hobby-purple: #f0fff4;
+  --hobby-purple-dark: #e8ffe8;
+  --hobby-pink: #fdf2ff;
+  --hobby-pink-dark: #fae6ff;
+  --hobby-yellow: #fffbf0;
+  --hobby-yellow-dark: #fff5e6;
+  --hobby-blue: #f0f8ff;
+  --hobby-blue-dark: #e6f4ff;
+}
+
+/* Simple button styles - SOLID BLACK TEXT */
+.hobby_btn_primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hobby-orange);
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #e5e7eb;
+}
+
+.hobby_btn_primary:hover {
+  background: var(--hobby-orange-dark);
+  color: #000000;
+}
+
+.hobby_btn_success {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hobby-teal);
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #e5e7eb;
+}
+
+.hobby_btn_success:hover {
+  background: var(--hobby-teal-dark);
+  color: #000000;
+}
+
+.hobby_btn_danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hobby-pink);
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #e5e7eb;
+}
+
+.hobby_btn_danger:hover {
+  background: var(--hobby-pink-dark);
+  color: #000000;
+}
+
+.hobby_btn_warning {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hobby-yellow);
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #e5e7eb;
+}
+
+.hobby_btn_warning:hover {
+  background: var(--hobby-yellow-dark);
+  color: #000000;
+}
+
+.hobby_btn_info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hobby-blue);
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #e5e7eb;
+}
+
+.hobby_btn_info:hover {
+  background: var(--hobby-blue-dark);
+  color: #000000;
+}
+
+/* Ensure all hobby buttons are clickable */
+.hobby_btn_primary,
+.hobby_btn_success, 
+.hobby_btn_danger,
+.hobby_btn_warning,
+.hobby_btn_info {
+  pointer-events: auto !important;
+  user-select: none;
+}
+
+.hobby_btn_primary *,
+.hobby_btn_success *,
+.hobby_btn_danger *,
+.hobby_btn_warning *,
+.hobby_btn_info * {
+  pointer-events: none;
+}
+
+/* Force all text in buttons to be solid black - polished look */
+.hobby_btn_primary,
+.hobby_btn_primary:hover,
+.hobby_btn_primary:focus,
+.hobby_btn_primary:active,
+.hobby_btn_success,
+.hobby_btn_success:hover,
+.hobby_btn_success:focus,
+.hobby_btn_success:active,
+.hobby_btn_danger,
+.hobby_btn_danger:hover,
+.hobby_btn_danger:focus,
+.hobby_btn_danger:active,
+.hobby_btn_warning,
+.hobby_btn_warning:hover,
+.hobby_btn_warning:focus,
+.hobby_btn_warning:active,
+.hobby_btn_info,
+.hobby_btn_info:hover,
+.hobby_btn_info:focus,
+.hobby_btn_info:active {
+  color: #000000 !important;
+}
+
+/* Force all child text elements to be black */
+.hobby_btn_primary *,
+.hobby_btn_primary:hover *,
+.hobby_btn_success *,
+.hobby_btn_success:hover *,
+.hobby_btn_danger *,
+.hobby_btn_danger:hover *,
+.hobby_btn_warning *,
+.hobby_btn_warning:hover *,
+.hobby_btn_info *,
+.hobby_btn_info:hover * {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+.hobby_btn_primary .btn_icon,
+.hobby_btn_success .btn_icon,
+.hobby_btn_danger .btn_icon,
+.hobby_btn_warning .btn_icon,
+.hobby_btn_info .btn_icon {
+  margin-right: 8px;
+  font-size: 1.4rem;
+  position: relative;
+  z-index: 2;
+  transition: none;
+  filter: none;
+  color: #000000 !important;
+}
+
+/* Button text and icon styles - BLACK POLISHED TEXT */
+.hobby_btn_primary .btn_text,
+.hobby_btn_primary:hover .btn_text {
+  color: #000000 !important;
+  position: relative;
+  z-index: 2;
+  font-weight: 900;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+  text-shadow: none;
+  letter-spacing: 0.5px;
+}
+
+.hobby_btn_success .btn_text,
+.hobby_btn_success:hover .btn_text {
+  color: #000000 !important;
+  position: relative;
+  z-index: 2;
+  font-weight: 900;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+  text-shadow: none;
+  letter-spacing: 0.5px;
+}
+
+.hobby_btn_danger .btn_text,
+.hobby_btn_danger:hover .btn_text {
+  color: #000000 !important;
+  position: relative;
+  z-index: 2;
+  font-weight: 900;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+  text-shadow: none;
+  letter-spacing: 0.5px;
+}
+
+.hobby_btn_info .btn_text,
+.hobby_btn_info:hover .btn_text {
+  color: #000000 !important;
+  position: relative;
+  z-index: 2;
+  font-weight: 900;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+  text-shadow: none;
+  letter-spacing: 0.5px;
+}
+
+.hobby_btn_warning .btn_text,
+.hobby_btn_warning:hover .btn_text {
+  color: #000000 !important;
+  position: relative;
+  z-index: 2;
+  font-weight: 900;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+  text-shadow: none;
+  letter-spacing: 0.5px;
+}
+
+/* Button groups */
+.btn_group {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.btn_group_vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hobby_btn_primary,
+  .hobby_btn_success,
+  .hobby_btn_danger,
+  .hobby_btn_warning,
+  .hobby_btn_info {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    min-width: 120px;
+  }
+  
+  .btn_group {
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hobby_btn_primary,
+  .hobby_btn_success,
+  .hobby_btn_danger,
+  .hobby_btn_warning,
+  .hobby_btn_info {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    min-width: 100px;
+  }
+  
+  .btn_group {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+}

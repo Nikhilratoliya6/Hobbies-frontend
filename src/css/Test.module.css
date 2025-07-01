@@ -1,27 +1,31 @@
 .test_form {
   margin: 20px auto;
-  background: linear-gradient(to right, #696989, #dcdce6);
+  background: linear-gradient(135deg, rgba(105, 105, 137, 0.95) 0%, rgba(220, 220, 230, 0.9) 100%);
+  backdrop-filter: blur(10px);
   color: white;
   width: 800px;
   min-height: 500px;
   height: min-content;
   border-radius: 15px;
   padding: 80px;
-  box-shadow: 10px 10px 12px 12px rgba(248, 246, 246, 0.75);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   justify-content: space-evenly;
 }
 
 .test_form_end {
   margin: 20px auto;
-  background: linear-gradient(to right, #696989, #dcdce6);
+  background: linear-gradient(135deg, rgba(105, 105, 137, 0.95) 0%, rgba(220, 220, 230, 0.9) 100%);
+  backdrop-filter: blur(10px);
   color: white;
   width: 800px;
   min-height: 500px;
   height: min-content;
   border-radius: 15px;
   padding: 80px;
-  box-shadow: 10px 10px 12px 12px rgba(248, 246, 246, 0.75);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .test_end {

@@ -180,7 +180,7 @@ const CreateOffer = () => {
   return (
     <>
       <main className={styles.offer_main}>
-        <h1 className={styles.title_offer}>Create offer</h1>
+        <h1 className={styles.title_offer}>Create Hobby Experience</h1>
         <form className={styles.form_offer} onSubmit={submitHandler}>
           <OfferInputField
             type="text"

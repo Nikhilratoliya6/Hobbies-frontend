@@ -6,6 +6,7 @@ import { useState, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styles from "../../../css/UserHome.module.css";
+import hobbyBtnStyles from "../../../css/SimpleButtons.module.css";
 import style from "../../../css/Footer.module.css";
 import Footer from "../fragments/footer/Footer";
 
@@ -92,26 +93,24 @@ const UserHome = () => {
                   {isUserLoggedIn && (
                     <div>
                       <p className={styles.intro}>
-                        You have no hobbie matches.
+                        Ready to discover your hobby tribe? Let's find creative professionals and experiences that match your passion!
                       </p>
                       <div className={styles.buttuns}>
-                        <button className={styles.link}>
-                          <Link to="/test" className={styles.btn}>
-                            Discover
-                          </Link>
-                        </button>
+                        <Link to="/test" className={hobbyBtnStyles.hobby_btn_primary}>
+                          <span className={hobbyBtnStyles.btn_icon}>🎯</span>
+                          <span className={hobbyBtnStyles.btn_text}>Discover Hobbies</span>
+                        </Link>
                       </div>
                     </div>
                   )}
                   {isBusinessLoggedIn && (
                     <div>
-                      <p className={styles.intro}>You have no hobbie offers.</p>
+                      <p className={styles.intro}>Share your creative skills and connect with hobby enthusiasts in your area!</p>
                       <div className={styles.buttuns}>
-                        <button className={styles.link}>
-                          <Link to="/create-offer" className={styles.btn}>
-                            Create Offer
-                          </Link>
-                        </button>
+                        <Link to="/create-offer" className={hobbyBtnStyles.hobby_btn_primary}>
+                          <span className={hobbyBtnStyles.btn_icon}>➕</span>
+                          <span className={hobbyBtnStyles.btn_text}>Create Hobby Experience</span>
+                        </Link>
                       </div>
                     </div>
                   )}

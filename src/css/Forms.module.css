@@ -1,10 +1,18 @@
 /* .test */
 .form_style {
   width: 90%;
+  max-width: 500px;
+  margin: 2rem auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .loginh1 {
@@ -15,7 +23,15 @@
 }
 
 .signup_form {
-  width: 30%;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .midErrors {

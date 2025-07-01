@@ -17,76 +17,76 @@ const TestForm = () => {
 
   const questions = [
     {
-      questionText: "What is missing in your life?",
+      questionText: "What type of hobby experience are you looking for?",
       value: "categoryOne",
       answerOptions: [
-        { answerText: "Excitement", category: "FUN" },
-        { answerText: "Mental stimulation", category: "INTELLECTUAL" },
-        { answerText: "Pushing my boundaries", category: "ACTIVE" },
-        { answerText: "Creativity", category: "CREATIVE" },
+        { answerText: "Fun & Entertainment", category: "FUN" },
+        { answerText: "Learning & Growth", category: "INTELLECTUAL" },
+        { answerText: "Active & Physical", category: "ACTIVE" },
+        { answerText: "Creative & Artistic", category: "CREATIVE" },
       ],
     },
     {
-      questionText: "Do you enjoy social activities?",
+      questionText: "Do you enjoy learning with others?",
       value: "categoryTwo",
       answerOptions: [
-        { answerText: "Yes", category: "SOCIAL" },
-        { answerText: "No", category: "OTHER" },
-        { answerText: "Sometimes", category: "SOCIAL" },
-        { answerText: "Not sure", category: "OTHER" },
+        { answerText: "Yes, I love group activities", category: "SOCIAL" },
+        { answerText: "I prefer one-on-one learning", category: "OTHER" },
+        { answerText: "Sometimes, depends on the hobby", category: "SOCIAL" },
+        { answerText: "I like to learn solo first", category: "OTHER" },
       ],
     },
     {
-      questionText: "Are you an active person?",
+      questionText: "How active do you like to be in your free time?",
       value: "categoryThree",
       answerOptions: [
-        { answerText: "Yes", category: "ACTIVE" },
-        { answerText: "No", category: "OTHER" },
-        { answerText: "Sometimes", category: "ACTIVE" },
-        { answerText: "Not sure", category: "OTHER" },
+        { answerText: "Very active - I love movement", category: "ACTIVE" },
+        { answerText: "Prefer relaxed activities", category: "OTHER" },
+        { answerText: "Mix of both active and calm", category: "ACTIVE" },
+        { answerText: "Depends on my mood", category: "OTHER" },
       ],
     },
     {
-      questionText: "How did you spend your last weekend?",
+      questionText: "What sounds most appealing for your weekend?",
       value: "categoryFour",
       answerOptions: [
-        { answerText: "On the computer", category: "INTELLECTUAL" },
-        { answerText: "On the couch", category: "RELAX" },
-        { answerText: "Outside", category: "ACTIVE" },
-        { answerText: "Other", category: "OTHER" },
+        { answerText: "Learning a new skill online", category: "INTELLECTUAL" },
+        { answerText: "Relaxing creative activities", category: "RELAX" },
+        { answerText: "Outdoor adventures", category: "ACTIVE" },
+        { answerText: "Trying something completely new", category: "OTHER" },
       ],
     },
     {
-      questionText: "Where did you spent your last vacation?",
+      questionText: "What type of environment energizes you?",
       value: "categoryFive",
       answerOptions: [
-        { answerText: "In the mountains", category: "ACTIVE" },
-        { answerText: "On the beach", category: "RELAX" },
-        { answerText: "At home", category: "RELAX" },
-        { answerText: "Other", category: "OTHER" },
+        { answerText: "Mountains & nature", category: "ACTIVE" },
+        { answerText: "Cozy studios & cafes", category: "RELAX" },
+        { answerText: "Comfortable home space", category: "RELAX" },
+        { answerText: "Bustling creative spaces", category: "OTHER" },
       ],
     },
     {
-      questionText: "What is the best compliment you've ever received?",
+      questionText: "What would you most like to hear someone say about you?",
       value: "categorySix",
       answerOptions: [
-        { answerText: "You are creative", category: "CREATIVE" },
-        { answerText: "You are fit", category: "ACTIVE" },
-        { answerText: "You are smart", category: "INTELLECTUAL" },
-        { answerText: "You are a good person", category: "SOCIAL" },
+        { answerText: "You're so creative and inspiring", category: "CREATIVE" },
+        { answerText: "You're really active and energetic", category: "ACTIVE" },
+        { answerText: "You're thoughtful and smart", category: "INTELLECTUAL" },
+        { answerText: "You're fun to be around", category: "SOCIAL" },
       ],
     },
     {
-      questionText: "Are you willing to commit?",
+      questionText: "How much time can you commit to a new hobby?",
       value: "categorySeven",
       answerOptions: [
-        { answerText: "Yes, always", category: "OTHER" },
-        { answerText: "Sometimes", category: "OTHER" },
+        { answerText: "I'm all in - regular commitment", category: "OTHER" },
+        { answerText: "Weekends and evenings", category: "OTHER" },
         {
-          answerText: "Only if I find the perfect activity",
+          answerText: "Occasional sessions when I have time",
           category: "OTHER",
         },
-        { answerText: "No", category: "OTHER" },
+        { answerText: "Just want to try once or twice", category: "OTHER" },
       ],
     },
     {
@@ -137,11 +137,12 @@ const TestForm = () => {
         {currentQuestion === questions.length && (
           <div className={styles.test_form_end}>
             <section className={styles.test_end}>
-              Thank you! Please visit your homepage to discover your new hobby!{" "}
+              🎉 Amazing! Your hobby personality is ready! <br></br>
+              Discover hobby professionals and experiences matched just for you!{" "}
               <br></br>
               <button type="submit" className={styles.button}>
                 <Link to="/user-home" className={styles.link_home}>
-                  Discover
+                  Find My Hobby Matches
                 </Link>
               </button>
             </section>

@@ -8,26 +8,28 @@ const Presentation = () => {
       <section className={styles.introduction}>
         <article className={styles.intro_text}>
           <h1 className={styles.main_title}>
-            Connect with Creative Professionals
+            Turn Free Time into Passion Time
           </h1>
           <h2 className={styles.subtitle}>
-            Arts • Entertainment • Recreation
+            Connect with artists, bakers, musicians, and more. Join, assist, or just enjoy — your hobby tribe awaits.
           </h2>
           <p className={styles.description}>
-            Discover talented artists, performers, and entertainers in your area. 
-            Whether you're looking to hire creative professionals or showcase your 
-            artistic services, our platform connects the vibrant community of arts 
-            and entertainment.
+            We bring hobby lovers and hobby doers together. Whether you're a beginner, 
+            an enthusiast, or a professional — our platform connects people who want to 
+            share, learn, or explore hobbies during their free time.
           </p>
           <div className={styles.features}>
             <div className={styles.feature_item}>
-              🎨 <span>Find Local Artists</span>
+              🎨 <span>Connect with Artists</span>
             </div>
             <div className={styles.feature_item}>
-              🎭 <span>Book Performers</span>
+              🧁 <span>Join Baking Sessions</span>
             </div>
             <div className={styles.feature_item}>
-              🎪 <span>Discover Events</span>
+              � <span>Music Jam Sessions</span>
+            </div>
+            <div className={styles.feature_item}>
+              ✨ <span>Creative Workshops</span>
             </div>
           </div>
         </article>
@@ -35,16 +37,16 @@ const Presentation = () => {
         <article className={styles.buttons}>
           <div className={styles.button_group}>
             <Link to="/signup" className={`${styles.btn_primary} ${styles.consumer_btn}`}>
-              <span className={styles.btn_text}>Find Services</span>
-              <span className={styles.btn_subtext}>I'm looking to hire</span>
+              <span className={styles.btn_text}>Explore Hobbies</span>
+              <span className={styles.btn_subtext}>I want to join & learn</span>
             </Link>
             <Link to="/register-business" className={`${styles.btn_secondary} ${styles.artist_btn}`}>
-              <span className={styles.btn_text}>Offer Services</span>
-              <span className={styles.btn_subtext}>I'm a creative professional</span>
+              <span className={styles.btn_text}>Share Your Skills</span>
+              <span className={styles.btn_subtext}>I'm a hobby professional</span>
             </Link>
           </div>
           <Link to="/login" className={styles.login_link}>
-            Already have an account? Sign in
+            Already part of the hobby community? Sign in
           </Link>
         </article>
       </section>
