@@ -32,10 +32,9 @@
   },
   "scripts": {
     "start": "PORT=4200 react-scripts start",
-    "build": "react-scripts build",
+    "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(jest-)?(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons|react-confirm-alert)/)'",
-    "eject": "react-scripts eject",
-    "build:vercel": "npm run build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
