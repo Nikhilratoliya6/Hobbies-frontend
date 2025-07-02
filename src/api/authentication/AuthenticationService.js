@@ -19,20 +19,14 @@ class AuthenticationService {
 
   isUserLoggedIn() {
     let role = sessionStorage.getItem("role");
-    if (role !== "user") {
-      return false;
-    } else {
-      return true;
-    }
+    let username = sessionStorage.getItem("authenticatedUser");
+    return role === "user" && username !== null && username !== "";
   }
 
   isBusinessLoggedIn() {
     let role = sessionStorage.getItem("role");
-    if (role !== "business") {
-      return false;
-    } else {
-      return true;
-    }
+    let username = sessionStorage.getItem("authenticatedUser");
+    return role === "business" && username !== null && username !== "";
   }
 
   getLoggedInUser() {

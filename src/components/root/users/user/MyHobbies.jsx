@@ -4,7 +4,7 @@ import styles from "../../../../css/UserHome.module.css";
 import hobbyBtnStyles from "../../../../css/SimpleButtons.module.css";
 import style from "../../../../css/Footer.module.css";
 import BackgroundHome from "../../fragments/background/BackgroundHome";
-import { useState, useLayoutEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import MyHobbiesDataService from "../../../../api/hobby/MyHobbiesDataService";
@@ -19,7 +19,7 @@ const MyHobbies = () => {
   const [welcomeDiv, setWelcomeDiv] = useState({ showDiv: false });
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState({ show: false, message: '', type: '' });
-  const [refreshKey, setRefreshKey] = useState(0);
+  const [error, setError] = useState(null);
 
   const handleSort = useCallback((value) => (event) => {
     event.preventDefault();
@@ -52,14 +52,13 @@ const MyHobbies = () => {
         type: 'error'
       });
     });
-  }, []); // Remove state.length dependency
+  }, []);
 
   const closeToast = () => {
     setToast({ show: false, message: '', type: '' });
   };
 
   const refreshHobbies = async () => {
-    setRefreshKey(prev => prev + 1);
     try {
       await loadHobbies(true); // Force refresh from API
       setToast({
@@ -73,11 +72,13 @@ const MyHobbies = () => {
   };
 
   const loadHobbies = async (forceRefresh = false) => {
-    setLoading(true);
     try {
+      setLoading(true);
+      setError(null);
+      console.log('Loading hobbies...');
+      
       const response = await MyHobbiesDataService(forceRefresh);
       console.log('Fetched saved hobbies response:', response);
-      console.log('Response data:', response.data);
       
       // More robust data validation
       let hobbies = [];
@@ -96,6 +97,7 @@ const MyHobbies = () => {
       
     } catch (error) {
       console.error('Error fetching saved hobbies:', error);
+      setError(error.message || 'Failed to load saved hobbies');
       setState([]);
       setWelcomeDiv({ showDiv: true });
       setToast({
@@ -108,13 +110,11 @@ const MyHobbies = () => {
     }
   };
 
-  useLayoutEffect(() => {
-    let unmounted = false;
-    console.log('MyHobbies useLayoutEffect triggered, refreshKey:', refreshKey);
+  useEffect(() => {
+    let mounted = true;
     
     const loadData = async () => {
-      if (!unmounted) {
-        console.log('Loading hobbies data...');
+      if (mounted) {
         await loadHobbies();
       }
     };
@@ -122,20 +122,9 @@ const MyHobbies = () => {
     loadData();
     
     return () => {
-      console.log('MyHobbies component cleanup');
-      unmounted = true;
+      mounted = false;
     };
-  }, [refreshKey]); // Add refreshKey as dependency
-
-  // Add debugging for state changes
-  React.useEffect(() => {
-    console.log('State changed:', {
-      hobbiesCount: state.length,
-      loading,
-      welcomeDiv: welcomeDiv.showDiv,
-      hobbies: state
-    });
-  }, [state, loading, welcomeDiv]);
+  }, []); // Remove refreshKey dependency
   return (
     <>
       <Toast 
@@ -166,14 +155,26 @@ const MyHobbies = () => {
             </div>
           </div>
 
-          {loading && (
+          {error && (
+            <div className={styles.error_message}>
+              <p>Error: {error}</p>
+              <button 
+                onClick={refreshHobbies} 
+                className={hobbyBtnStyles.hobby_btn_secondary}
+              >
+                Try Again
+              </button>
+            </div>
+          )}
+
+          {loading && !error && (
             <div className={styles.loading_container}>
               <div className={styles.loading_spinner}></div>
               <p className={styles.loading_text}>Loading your hobbies...</p>
             </div>
           )}
 
-          {!loading && state.length > 0 && (
+          {!loading && !error && state.length > 0 && (
             <section className={styles.cards}>
               {state.map((hobby, index) => (
                 <SavedHobbyCard
@@ -187,8 +188,8 @@ const MyHobbies = () => {
             </section>
           )}
 
-          {!loading && (state.length === 0 || welcomeDiv.showDiv) && (
-            <div className={`${styles.introduction_home} fade-in-up`}>
+          {!loading && !error && (state.length === 0 || welcomeDiv.showDiv) && (
+            <div className={styles.introduction_home}>
               <div className={styles.intro_text}>
                 <div className={styles.empty_icon}>🎨</div>
                 <h3>Your hobby journey starts here!</h3>

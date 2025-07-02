@@ -1,8 +1,8 @@
-import React, { memo, useMemo, useCallback } from "react";
+import React, { useCallback } from "react";
 import BackgroundHome from "../fragments/background/BackgroundHome";
 import HomeDataService from "../../../api/hobby/HomeDataService";
 import AuthenticationService from "../../../api/authentication/AuthenticationService";
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styles from "../../../css/UserHome.module.css";
@@ -14,15 +14,40 @@ import HobbyCard from "../../common/HobbyCard";
 const UserHome = () => {
   const navigate = useNavigate();
   
-  // Remove useMemo to avoid potential re-render issues
-  const [authState, setAuthState] = useState({
-    isUserLoggedIn: AuthenticationService.isUserLoggedIn(),
-    isBusinessLoggedIn: AuthenticationService.isBusinessLoggedIn()
-  });
-
+  // Simplify state management
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [welcomeDiv, setWelcomeDiv] = useState({ showDiv: false });
+  const [error, setError] = useState(null);
+  const [authState, setAuthState] = useState({
+    isUserLoggedIn: false,
+    isBusinessLoggedIn: false
+  });
+
+  // Update authentication state in useEffect to ensure proper reactivity
+  useEffect(() => {
+    const updateAuthState = () => {
+      const newAuthState = {
+        isUserLoggedIn: AuthenticationService.isUserLoggedIn(),
+        isBusinessLoggedIn: AuthenticationService.isBusinessLoggedIn()
+      };
+      setAuthState(newAuthState);
+    };
+    
+    updateAuthState();
+    
+    // Listen for storage changes to update auth state
+    const handleStorageChange = (e) => {
+      if (e.key === 'authenticatedUser' || e.key === 'role') {
+        updateAuthState();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   const handleSort = useCallback((value) => (event) => {
     event.preventDefault();
@@ -34,28 +59,41 @@ const UserHome = () => {
     }
   }, [navigate, authState.isUserLoggedIn, authState.isBusinessLoggedIn]);
 
-  useLayoutEffect(() => {
-    let unmounted = false;
-    setLoading(true);
-    console.log('UserHome: Loading hobbies...');
-
+  useEffect(() => {
+    let mounted = true;
+    
     const loadData = async () => {
+      // Only load data if user is authenticated
+      if (!authState.isUserLoggedIn && !authState.isBusinessLoggedIn) {
+        setLoading(false);
+        setState([]);
+        return;
+      }
+
       try {
-        const response = await HomeDataService();
-        console.log('UserHome: HomeDataService response:', response);
+        setLoading(true);
+        setError(null);
         
-        if (!unmounted) {
+        const response = await HomeDataService();
+        
+        if (mounted && response && response.data) {
           const hobbies = Array.isArray(response.data) ? response.data : [];
-          console.log('UserHome: Processed hobbies:', hobbies.length, hobbies);
+          console.log('✅ Setting hobbies:', hobbies.length, hobbies);
           setState(hobbies);
-          setWelcomeDiv({ showDiv: hobbies.length === 0 });
-          setLoading(false);
+        } else if (mounted) {
+          console.log('⚠️ No data in response, keeping existing state');
         }
       } catch (error) {
-        if (!unmounted) {
-          console.error('UserHome: Error loading hobbies:', error);
-          setState([]);
-          setWelcomeDiv({ showDiv: true });
+        if (mounted) {
+          console.error('❌ UserHome: Error loading hobbies:', error);
+          setError(error.message || 'Failed to load hobbies');
+          // Don't clear existing data if we have it and auth is still valid
+          if (!state.length || !authState.isUserLoggedIn) {
+            setState([]);
+          }
+        }
+      } finally {
+        if (mounted) {
           setLoading(false);
         }
       }
@@ -64,34 +102,67 @@ const UserHome = () => {
     loadData();
 
     return () => {
-      unmounted = true;
+      mounted = false;
     };
-  }, [authState.isBusinessLoggedIn, authState.isUserLoggedIn]);
+  }, [authState.isUserLoggedIn, authState.isBusinessLoggedIn]); // Reload when auth state changes
 
-  // Debug state changes
-  React.useEffect(() => {
-    console.log('UserHome state changed:', {
-      hobbiesCount: state.length,
+  // Track all state changes
+  useEffect(() => {
+    console.log('🔄 UserHome State Change:', {
+      timestamp: new Date().toISOString(),
+      auth: { user: authState.isUserLoggedIn, business: authState.isBusinessLoggedIn },
       loading,
-      welcomeDiv: welcomeDiv.showDiv,
-      authState
+      dataCount: state.length,
+      error: !!error
     });
-  }, [state, loading, welcomeDiv, authState]);
+  }, [authState, loading, state, error]);
 
   return (
     <>
       <BackgroundHome />
       <main className={styles.hobbie_main}>
         <section className={styles.hobbie_container_home}>
-          {loading && (
+          {/* Temporary debug info to identify the issue */}
+          {process.env.NODE_ENV === 'development' && (
+            <div style={{ 
+              padding: '10px', 
+              backgroundColor: '#e6f3ff', 
+              margin: '10px', 
+              fontSize: '12px',
+              border: '1px solid #0066cc',
+              position: 'sticky',
+              top: '10px',
+              zIndex: 1000
+            }}>
+              🔍 DEBUG: Auth({authState.isUserLoggedIn ? 'USER' : authState.isBusinessLoggedIn ? 'BIZ' : 'NONE'}) | 
+              Loading: {loading ? 'YES' : 'NO'} | 
+              Data: {state.length} items | 
+              Error: {error ? 'YES' : 'NO'} |
+              Time: {new Date().toLocaleTimeString()}
+            </div>
+          )}
+          
+          {error && (
+            <div className={styles.error_message}>
+              <p>Error: {error}</p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className={hobbyBtnStyles.hobby_btn_secondary}
+              >
+                Reload Page
+              </button>
+            </div>
+          )}
+          
+          {loading && !error && (
             <div className={styles.loading_container}>
               <div className={styles.loading_spinner}></div>
               <p className={styles.loading_text}>Loading hobby experiences...</p>
             </div>
           )}
           
-          {!loading && state.length > 0 && (
-            <section className={styles.cards}>
+          {state.length > 0 && !error && (
+            <section className={styles.cards} style={{ border: '2px solid green', padding: '10px' }}>
               {state.map((hobby, index) => (
                 <HobbyCard
                   key={hobby.id}
@@ -103,7 +174,7 @@ const UserHome = () => {
             </section>
           )}
 
-          {!loading && state.length === 0 && (
+          {!loading && !error && state.length === 0 && (authState.isUserLoggedIn || authState.isBusinessLoggedIn) && (
             <div>
               <article className={styles.introduction_home}>
                 <div className={styles.intro_text}>

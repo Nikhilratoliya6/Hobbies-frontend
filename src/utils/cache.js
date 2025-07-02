@@ -6,32 +6,49 @@ class ApiCache {
   }
 
   set(key, data) {
-    const item = {
-      data,
-      timestamp: Date.now()
-    };
-    this.cache.set(key, item);
+    try {
+      const item = {
+        data,
+        timestamp: Date.now()
+      };
+      this.cache.set(key, item);
+    } catch (error) {
+      console.warn('Cache set error:', error);
+    }
   }
 
   get(key) {
-    const item = this.cache.get(key);
-    if (!item) return null;
+    try {
+      const item = this.cache.get(key);
+      if (!item) return null;
 
-    const isExpired = Date.now() - item.timestamp > this.maxAge;
-    if (isExpired) {
-      this.cache.delete(key);
+      const isExpired = Date.now() - item.timestamp > this.maxAge;
+      if (isExpired) {
+        this.cache.delete(key);
+        return null;
+      }
+
+      return item.data;
+    } catch (error) {
+      console.warn('Cache get error:', error);
       return null;
     }
-
-    return item.data;
   }
 
   clear() {
-    this.cache.clear();
+    try {
+      this.cache.clear();
+    } catch (error) {
+      console.warn('Cache clear error:', error);
+    }
   }
 
   delete(key) {
-    this.cache.delete(key);
+    try {
+      this.cache.delete(key);
+    } catch (error) {
+      console.warn('Cache delete error:', error);
+    }
   }
 }
 
