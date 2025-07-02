@@ -1,25 +1,18 @@
 import axios from "axios";
 
-const AuthenticateUserDataService = (username, password) => {
-  return axios
-    .post(`http://localhost:8080/authenticate`, {
+const AuthenticateUserDataService = async (username, password) => {
+  try {
+    const response = await axios.post(`http://localhost:8080/authenticate`, {
       username,
       password,
-    })
-    .then((res) => {
-      if (res != null) {
-        console.log(res);
-        return res;
-      }
-    })
-    .catch((err) => {
-      let error = "";
-
-      if (err.response) {
-        error += err.response;
-      }
-      return error;
     });
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.error("Authentication error:", err);
+    // Re-throw the error to let the calling component handle it
+    throw err;
+  }
 };
 
 export default AuthenticateUserDataService;

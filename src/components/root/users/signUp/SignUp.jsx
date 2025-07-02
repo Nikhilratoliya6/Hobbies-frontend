@@ -64,16 +64,22 @@ const SignUp = () => {
     if (Object.keys(errors).length === 0) {
       console.log(info);
       setLoading(true);
-      await SignUpAppClientService(info)
-        .then((response) => {
-          if (response.status === 201) {
-            navigate("/login");
-          }
-        })
-        .catch((err) => {
+      try {
+        const response = await SignUpAppClientService(info);
+        if (response.status === 201) {
+          navigate("/login");
+        }
+      } catch (err) {
+        setLoading(false);
+        if (err.response && err.response.status === 409) {
+          // Conflict error - username or email already exists
           setError(true);
-          setLoading(false);
-        });
+        } else {
+          // Other error
+          setError(true);
+        }
+        console.error("Signup error:", err);
+      }
     } else {
       console.log(errors);
     }

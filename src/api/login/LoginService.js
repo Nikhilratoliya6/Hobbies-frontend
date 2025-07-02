@@ -1,18 +1,17 @@
 import axios from "../customAxiosConfig/CustomAxiosConfig";
 
-const LoginService = (username) => {
+const LoginService = async (username) => {
   try {
-    return axios.post(`/login`, null, {
+    const response = await axios.post(`/login`, null, {
       params: {
         username,
       },
     });
+    return response;
   } catch (err) {
-    let error = "";
-    if (err.response) {
-      error += err.response;
-    }
-    return error;
+    console.error("Login service error:", err);
+    // Re-throw the error to let the calling component handle it
+    throw err;
   }
 };
 

@@ -49,46 +49,60 @@ const Login = () => {
     console.log(errors);
     if (Object.keys(errors).length === 0) {
       setLoading(true);
-      const res = await AuthenticateUserDataService(
-        credentials.username,
-        credentials.password
-      );
-      console.log(res.data);
+      try {
+        const res = await AuthenticateUserDataService(
+          credentials.username,
+          credentials.password
+        );
+        console.log(res.data);
 
-      if (res.status !== 200) {
+        if (res.status === 200) {
+          let jwtToken = res.data.jwtToken;
+          const token = `Bearer ${jwtToken}`;
+          AuthenticationService.setUpToken(token);
+          
+          try {
+            const response = await LoginService(credentials.username);
+            console.log(response);
+            
+            if (response.status === 200) {
+              if (response.data === "USER") {
+                AuthenticationService.registerSuccessfulLoginUser(
+                  credentials.username
+                );
+                navigate("/user-home");
+              } else if (response.data === "BUSINESS_USER") {
+                AuthenticationService.registerSuccessfulLoginBusiness(
+                  credentials.username
+                );
+                navigate("/business-home");
+              }
+            } else {
+              setLoading(false);
+              setLoginState((prevState) => ({
+                ...prevState,
+                hasLoginFailed: true,
+                showSuccessMessage: false,
+              }));
+            }
+          } catch (loginErr) {
+            setLoading(false);
+            setLoginState((prevState) => ({
+              ...prevState,
+              hasLoginFailed: true,
+              showSuccessMessage: false,
+            }));
+            console.error("Login service error:", loginErr);
+          }
+        }
+      } catch (authErr) {
         setLoading(false);
-        setLoginState((prevState) => ({ ...prevState, hasLoginFailed: true }));
         setLoginState((prevState) => ({
           ...prevState,
+          hasLoginFailed: true,
           showSuccessMessage: false,
         }));
-      } else {
-        let jwtToken = res.data.jwtToken;
-        const token = `Bearer ${jwtToken}`;
-        AuthenticationService.setUpToken(token);
-        const response = await LoginService(credentials.username, jwtToken);
-        console.log(response);
-        if (response.status !== 200) {
-          setLoading(false);
-          setLoginState((prevState) => ({
-            ...prevState,
-            hasLoginFailed: true,
-          }));
-          setLoginState((prevState) => ({
-            ...prevState,
-            showSuccessMessage: false,
-          }));
-        } else if (response.data === "USER") {
-          AuthenticationService.registerSuccessfulLoginUser(
-            credentials.username
-          );
-          navigate("/user-home");
-        } else if (response.data === "BUSINESS_USER") {
-          AuthenticationService.registerSuccessfulLoginBusiness(
-            credentials.username
-          );
-          navigate("/business-home");
-        }
+        console.error("Authentication error:", authErr);
       }
     }
   };

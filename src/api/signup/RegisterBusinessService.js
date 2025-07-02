@@ -1,14 +1,12 @@
 import axios from "../customAxiosConfig/CustomAxiosConfig";
 
-const RegisterBusinessService = (business) => {
+const RegisterBusinessService = async (business) => {
   try {
-    return axios.post(`/register`, business);
+    const response = await axios.post(`/register`, business);
+    return response;
   } catch (err) {
-    let error = "";
-    if (err.response) {
-      error += err.response;
-    }
-    return error;
+    // Re-throw the error to let the calling component handle it
+    throw err;
   }
 };
 

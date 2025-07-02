@@ -1,14 +1,12 @@
 import axios from "../customAxiosConfig/CustomAxiosConfig";
 
-const SignUpAppClientService = (user) => {
+const SignUpAppClientService = async (user) => {
   try {
-    return axios.post(`/signup`, user);
+    const response = await axios.post(`/signup`, user);
+    return response;
   } catch (err) {
-    let error = "";
-    if (err.response) {
-      error += err.response;
-    }
-    return error;
+    // Re-throw the error to let the calling component handle it
+    throw err;
   }
 };
 
